@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE Physics 5054 — Complete Crash Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #090b12;
+  --surface: #0f1118;
+  --card: #161921;
+  --card-hover: #1d2130;
+  --border: rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.12);
+  --text: #dde1f0;
+  --muted: #5c6280;
+  --accent: #7c83f5;
+  --accent-dim: rgba(124,131,245,0.1);
+  --accent-glow: rgba(124,131,245,0.25);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.1);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.1);
+  --red: #f87171;
+  --red-dim: rgba(248,113,113,0.1);
+  --purple: #c084fc;
+  --purple-dim: rgba(192,132,252,0.1);
+  --sky: #38bdf8;
+  --sky-dim: rgba(56,189,248,0.1);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --shadow: 0 4px 32px rgba(0,0,0,0.5);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); min-height: 100vh; overflow-x: hidden; }
+::selection { background: var(--accent-dim); color: var(--text); }
+
+/* ─── VIEWS ─── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ─── HOME ─── */
+#home { padding-bottom: 80px; }
+.hero { padding: 60px 32px 40px; max-width: 1200px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-dim); border: 1px solid rgba(124,131,245,0.25); border-radius: 40px; padding: 6px 14px; font-size: 12px; color: var(--accent); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+.hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; color: #fff; margin-bottom: 16px; }
+.hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { font-size: 1.1rem; color: var(--muted); max-width: 580px; line-height: 1.7; margin-bottom: 32px; }
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-num { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+.controls { padding: 0 32px 24px; max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.search-box { flex: 1; min-width: 240px; position: relative; }
+.search-box input { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 16px 10px 40px; color: var(--text); font-family: var(--font-body); font-size: 14px; outline: none; transition: border 0.2s; }
+.search-box input:focus { border-color: rgba(124,131,245,0.4); }
+.search-box input::placeholder { color: var(--muted); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 15px; pointer-events: none; }
+.filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn { padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: var(--font-body); font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; letter-spacing: 0.03em; }
+.filter-btn:hover { border-color: var(--border-strong); color: var(--text); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.quiz-launch-btn { display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--accent), var(--purple)); border: none; border-radius: var(--r-md); padding: 10px 20px; color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.15s; letter-spacing: 0.02em; }
+.quiz-launch-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; padding: 0 32px; max-width: 1200px; margin: 0 auto; background: var(--border); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; }
+
+.topic-tile { background: var(--card); padding: 20px; cursor: pointer; transition: background 0.15s; position: relative; overflow: hidden; }
+.topic-tile::before { content: ''; position: absolute; inset: 0; background: var(--accent-dim); opacity: 0; transition: opacity 0.2s; }
+.topic-tile:hover { background: var(--card-hover); }
+.topic-tile:hover::before { opacity: 1; }
+.tile-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.tile-num { font-family: var(--font-mono); font-size: 10px; color: var(--muted); background: rgba(255,255,255,0.04); border-radius: 4px; padding: 3px 7px; flex-shrink: 0; margin-top: 2px; }
+.tile-name { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #fff; line-height: 1.3; flex: 1; }
+.tile-tag { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
+.tag-mech { background: var(--accent-dim); color: var(--accent); }
+.tag-energy { background: var(--green-dim); color: var(--green); }
+.tag-thermal { background: var(--amber-dim); color: var(--amber); }
+.tag-waves { background: var(--purple-dim); color: var(--purple); }
+.tag-elec { background: var(--sky-dim); color: var(--sky); }
+.tag-nuclear { background: var(--red-dim); color: var(--red); }
+
+.tile-preview { display: flex; gap: 8px; flex-wrap: wrap; }
+.tile-pill { font-size: 11px; color: var(--muted); background: rgba(255,255,255,0.04); border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+.tile-arrow { position: absolute; right: 20px; bottom: 20px; color: var(--muted); font-size: 18px; transition: transform 0.2s, color 0.2s; }
+.topic-tile:hover .tile-arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+/* ─── TOPIC FOCUS VIEW ─── */
+#topic-view { min-height: 100vh; }
+.topic-header { position: sticky; top: 0; z-index: 100; background: rgba(9,11,18,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
+.back-btn { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 8px 14px; color: var(--muted); font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font-body); }
+.back-btn:hover { color: var(--text); border-color: var(--border-strong); }
+.topic-header-info { flex: 1; }
+.topic-header-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: #fff; }
+.topic-header-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.topic-nav-tabs { display: flex; gap: 4px; background: var(--card); border-radius: var(--r-md); padding: 4px; }
+.tab-btn { padding: 8px 16px; border-radius: var(--r-sm); border: none; background: transparent; color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.tab-btn.active { background: var(--accent); color: #fff; }
+.tab-btn:hover:not(.active) { color: var(--text); }
+
+.topic-content { max-width: 900px; margin: 0 auto; padding: 32px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ─── LEARN TAB ─── */
+.section-heading { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.points-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+.point { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 16px; transition: border-color 0.2s; }
+.point:hover { border-color: var(--border-strong); }
+.point-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+.point-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+.point-text strong { color: #fff; font-weight: 600; }
+
+.mistakes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px; }
+@media(max-width:640px){ .mistakes-grid { grid-template-columns: 1fr; } }
+.mistake-card { background: var(--red-dim); border: 1px solid rgba(248,113,113,0.2); border-radius: var(--r-md); padding: 14px; }
+.mistake-icon { font-size: 14px; color: var(--red); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.mistake-text { font-size: 13px; color: rgba(248,113,113,0.85); line-height: 1.6; }
+
+.pro-tips { display: flex; flex-direction: column; gap: 8px; }
+.pro-tip { display: flex; gap: 12px; background: var(--green-dim); border: 1px solid rgba(52,211,153,0.2); border-radius: var(--r-md); padding: 12px 16px; }
+.pro-tip-icon { font-size: 13px; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; letter-spacing: 0.05em; }
+.pro-tip-text { font-size: 13px; color: rgba(52,211,153,0.9); line-height: 1.6; }
+
+/* ─── FORMULAS TAB ─── */
+.formulas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.formula-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; cursor: pointer; transition: all 0.2s; }
+.formula-card:hover { border-color: rgba(124,131,245,0.3); transform: translateY(-2px); }
+.formula-card.open { border-color: var(--accent); }
+.formula-top { padding: 16px; }
+.formula-name { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
+.formula-triangle { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.triangle-top { background: rgba(124,131,245,0.15); border: 1px solid rgba(124,131,245,0.3); border-bottom: none; width: 100px; height: 50px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 16px; font-weight: 500; color: var(--accent); clip-path: polygon(20% 100%, 80% 100%, 100% 100%, 50% 0%, 0% 100%); }
+.triangle-bottom { display: flex; width: 100px; }
+.triangle-bl, .triangle-br { flex: 1; height: 50px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; font-weight: 500; color: var(--accent); border: 1px solid rgba(124,131,245,0.3); border-top: none; }
+.triangle-bl { border-right: none; background: rgba(124,131,245,0.08); }
+.triangle-br { background: rgba(124,131,245,0.08); }
+
+.formula-triangle-wrap { position: relative; width: 130px; height: 80px; margin: 0 auto 8px; }
+.tri-svg { width: 130px; height: 80px; }
+.tri-cell { cursor: pointer; transition: opacity 0.15s; }
+.tri-cell:hover { opacity: 0.8; }
+.formula-main { font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: var(--accent); text-align: center; margin: 8px 0; letter-spacing: 0.02em; }
+.formula-expand-hint { text-align: center; font-size: 11px; color: var(--muted); padding-bottom: 12px; }
+
+.formula-detail { display: none; border-top: 1px solid var(--border); padding: 16px; }
+.formula-card.open .formula-detail { display: block; }
+.forms-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-row { display: flex; align-items: center; gap: 10px; background: var(--accent-dim); border-radius: var(--r-sm); padding: 8px 12px; }
+.form-var { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 50px; }
+.form-eq { font-family: var(--font-mono); font-size: 15px; color: var(--accent); font-weight: 500; }
+.example-box { background: rgba(255,255,255,0.03); border-left: 2px solid var(--green); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 12px; }
+.example-q { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.example-a { font-family: var(--font-mono); font-size: 13px; color: var(--green); line-height: 1.7; }
+.formula-unit { font-size: 11px; color: var(--muted); margin-top: 8px; }
+.formula-unit span { font-family: var(--font-mono); color: var(--amber); }
+
+/* ─── FLASHCARDS TAB ─── */
+.fc-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.fc-counter { font-size: 14px; color: var(--muted); }
+.fc-counter strong { color: var(--text); }
+.fc-progress-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.fc-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+
+.fc-scene { perspective: 1000px; width: 100%; max-width: 600px; margin: 0 auto 24px; }
+.fc-card { width: 100%; height: 260px; position: relative; cursor: pointer; transform-style: preserve-3d; transition: transform 0.5s ease; }
+.fc-card.flipped { transform: rotateY(180deg); }
+.fc-front, .fc-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--r-xl); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; text-align: center; }
+.fc-front { background: var(--card); border: 1px solid var(--border); }
+.fc-back { background: linear-gradient(135deg, rgba(124,131,245,0.15), rgba(192,132,252,0.15)); border: 1px solid rgba(124,131,245,0.3); transform: rotateY(180deg); }
+.fc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.fc-question { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: #fff; line-height: 1.4; }
+.fc-answer { font-size: 1rem; color: var(--accent); line-height: 1.7; font-weight: 500; }
+.fc-hint { font-size: 11px; color: var(--muted); margin-top: 12px; }
+
+.fc-controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 32px; }
+.fc-btn { display: flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: var(--r-md); border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.fc-btn:hover { border-color: var(--border-strong); }
+.fc-btn.fc-knew { border-color: rgba(52,211,153,0.4); color: var(--green); }
+.fc-btn.fc-knew:hover { background: var(--green-dim); }
+.fc-btn.fc-missed { border-color: rgba(248,113,113,0.4); color: var(--red); }
+.fc-btn.fc-missed:hover { background: var(--red-dim); }
+.fc-btn.fc-flip { background: var(--accent-dim); border-color: rgba(124,131,245,0.3); color: var(--accent); }
+
+.fc-all-done { text-align: center; padding: 40px; background: var(--green-dim); border: 1px solid rgba(52,211,153,0.2); border-radius: var(--r-xl); }
+.fc-done-icon { font-size: 48px; margin-bottom: 16px; }
+.fc-done-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+.fc-done-text { font-size: 14px; color: rgba(52,211,153,0.7); margin-bottom: 20px; }
+
+/* ─── PRACTICE TAB ─── */
+.mcq-list { display: flex; flex-direction: column; gap: 20px; }
+.mcq-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
+.mcq-num { font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.mcq-q { font-size: 15px; color: #fff; font-weight: 500; line-height: 1.6; margin-bottom: 16px; }
+.mcq-options { display: flex; flex-direction: column; gap: 8px; }
+.mcq-opt { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); cursor: pointer; transition: all 0.15s; font-size: 14px; color: var(--text); background: transparent; width: 100%; text-align: left; font-family: var(--font-body); }
+.mcq-opt:hover:not(:disabled) { border-color: rgba(124,131,245,0.4); background: var(--accent-dim); }
+.mcq-opt .opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 6px; min-width: 24px; text-align: center; flex-shrink: 0; color: var(--muted); }
+.mcq-opt.correct { border-color: var(--green) !important; background: var(--green-dim) !important; color: var(--green) !important; }
+.mcq-opt.correct .opt-letter { background: var(--green); color: #000; }
+.mcq-opt.wrong { border-color: var(--red) !important; background: var(--red-dim) !important; color: var(--red) !important; }
+.mcq-opt.wrong .opt-letter { background: var(--red); color: #fff; }
+.mcq-explanation { display: none; margin-top: 14px; background: var(--accent-dim); border-left: 2px solid var(--accent); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 12px; font-size: 13px; color: rgba(124,131,245,0.9); line-height: 1.7; }
+.mcq-explanation.show { display: block; }
+
+/* ─── QUIZ VIEW ─── */
+#quiz-view { min-height: 100vh; }
+.quiz-header { position: sticky; top: 0; z-index: 100; background: rgba(9,11,18,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
+.quiz-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: #fff; }
+.quiz-progress-wrap { flex: 1; max-width: 300px; }
+.quiz-progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); transition: width 0.4s; }
+.quiz-q-counter { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.quiz-timer { font-family: var(--font-mono); font-size: 14px; color: var(--amber); background: var(--amber-dim); padding: 6px 12px; border-radius: var(--r-sm); min-width: 60px; text-align: center; }
+.quiz-exit-btn { padding: 8px 14px; border-radius: var(--r-sm); border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; font-family: var(--font-body); transition: all 0.2s; }
+.quiz-exit-btn:hover { color: var(--text); }
+
+.quiz-body { max-width: 1000px; margin: 0 auto; padding: 32px; display: grid; grid-template-columns: 1fr 280px; gap: 24px; }
+@media(max-width:800px){ .quiz-body { grid-template-columns: 1fr; } .calc-wrap { display: none; } }
+
+.quiz-question-area { }
+.q-type-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border-radius: 20px; padding: 4px 12px; display: inline-block; margin-bottom: 16px; }
+.q-type-badge.calc-type { color: var(--amber); background: var(--amber-dim); }
+.quiz-q-text { font-size: 17px; color: #fff; font-weight: 500; line-height: 1.7; margin-bottom: 24px; }
+.quiz-q-text .formula { font-family: var(--font-mono); font-size: 15px; color: var(--sky); background: var(--sky-dim); padding: 2px 8px; border-radius: 4px; display: inline; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.quiz-opt { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--r-md); cursor: pointer; transition: all 0.2s; font-size: 15px; color: var(--text); background: var(--card); width: 100%; text-align: left; font-family: var(--font-body); line-height: 1.5; }
+.quiz-opt:hover:not(:disabled) { border-color: rgba(124,131,245,0.4); transform: translateX(3px); }
+.quiz-opt .opt-badge { font-family: var(--font-mono); font-size: 12px; font-weight: 600; background: rgba(255,255,255,0.07); border-radius: var(--r-sm); padding: 4px 10px; min-width: 32px; text-align: center; flex-shrink: 0; color: var(--muted); }
+.quiz-opt.selected { border-color: rgba(124,131,245,0.5); background: var(--accent-dim); }
+.quiz-opt.selected .opt-badge { background: var(--accent); color: #fff; }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-dim); }
+.quiz-opt.correct .opt-badge { background: var(--green); color: #000; }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-dim); }
+.quiz-opt.wrong .opt-badge { background: var(--red); color: #fff; }
+
+.quiz-ans-box { display: none; margin-top: 16px; background: var(--accent-dim); border: 1px solid rgba(124,131,245,0.2); border-radius: var(--r-md); padding: 16px; }
+.quiz-ans-box.show { display: block; }
+.quiz-ans-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.quiz-ans-text { font-size: 14px; color: var(--text); line-height: 1.7; }
+.quiz-ans-text .math { font-family: var(--font-mono); color: var(--sky); }
+
+.quiz-nav { display: flex; align-items: center; gap: 12px; }
+.quiz-next-btn { display: flex; align-items: center; gap: 8px; background: var(--accent); border: none; border-radius: var(--r-md); padding: 12px 24px; color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+.quiz-next-btn:hover { opacity: 0.9; }
+.quiz-next-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.quiz-skip-btn { background: transparent; border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 20px; color: var(--muted); font-family: var(--font-body); font-size: 13px; cursor: pointer; transition: all 0.2s; }
+
+/* ─── CALCULATOR ─── */
+.calc-wrap { position: sticky; top: 90px; }
+.calc { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; }
+.calc-header { padding: 12px 16px; background: rgba(251,191,36,0.08); border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 600; color: var(--amber); letter-spacing: 0.08em; text-transform: uppercase; }
+.calc-display { background: rgba(0,0,0,0.3); padding: 16px; min-height: 70px; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; gap: 4px; }
+.calc-prev { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-height: 16px; }
+.calc-current { font-family: var(--font-mono); font-size: 24px; color: #fff; word-break: break-all; }
+.calc-btns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+.calc-btn { background: var(--card); border: none; padding: 14px 8px; color: var(--text); font-family: var(--font-mono); font-size: 14px; cursor: pointer; transition: background 0.1s; text-align: center; }
+.calc-btn:hover { background: var(--card-hover); }
+.calc-btn:active { background: rgba(124,131,245,0.15); }
+.calc-btn.op { color: var(--accent); font-size: 16px; }
+.calc-btn.eq { background: var(--accent); color: #fff; font-size: 18px; }
+.calc-btn.eq:hover { background: rgba(124,131,245,0.8); }
+.calc-btn.clr { color: var(--red); }
+.calc-btn.span2 { grid-column: span 2; }
+
+/* ─── RESULT SCREEN ─── */
+#result-view { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; }
+.result-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 48px; max-width: 600px; width: 100%; text-align: center; }
+.result-score-ring { width: 160px; height: 160px; margin: 0 auto 32px; position: relative; }
+.result-score-ring svg { transform: rotate(-90deg); }
+.result-score-num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.result-pct { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: #fff; }
+.result-label { font-size: 11px; color: var(--muted); }
+.result-grade { font-family: var(--font-display); font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+.result-message { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 32px; }
+.result-breakdown { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+.breakdown-item { background: rgba(255,255,255,0.04); border-radius: var(--r-md); padding: 16px; }
+.breakdown-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
+.breakdown-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.result-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.result-btn { padding: 12px 24px; border-radius: var(--r-md); font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.result-btn.primary { background: var(--accent); border: none; color: #fff; }
+.result-btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.result-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ─── QUIZ START SCREEN ─── */
+#quiz-start { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 32px; }
+.quiz-start-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 48px; max-width: 560px; width: 100%; text-align: center; }
+.qs-icon { font-size: 48px; margin-bottom: 20px; }
+.qs-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.qs-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+.qs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+.qs-stat { background: rgba(255,255,255,0.04); border-radius: var(--r-md); padding: 16px; }
+.qs-stat-n { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.qs-stat-l { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.qs-start-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--accent), var(--purple)); border: none; border-radius: var(--r-md); color: #fff; font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.15s; letter-spacing: 0.02em; }
+.qs-start-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* ─── MISC ─── */
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+.no-results-msg { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; display: none; }
+
+/* calc input answer */
+.calc-input-area { margin-bottom: 24px; }
+.calc-input-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.calc-input-wrap { display: flex; gap: 10px; }
+.calc-input-wrap input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 16px; color: var(--text); font-family: var(--font-mono); font-size: 15px; outline: none; transition: border 0.2s; }
+.calc-input-wrap input:focus { border-color: rgba(124,131,245,0.4); }
+.check-btn { padding: 12px 20px; background: var(--accent); border: none; border-radius: var(--r-sm); color: #fff; font-family: var(--font-body); font-size: 13px; font-weight: 600; cursor: pointer; }
+.calc-hint { display: none; margin-top: 10px; padding: 12px; border-radius: var(--r-sm); font-size: 13px; line-height: 1.6; }
+.calc-hint.correct { background: var(--green-dim); border: 1px solid rgba(52,211,153,0.2); color: var(--green); }
+.calc-hint.wrong { background: var(--red-dim); border: 1px solid rgba(248,113,113,0.2); color: var(--red); }
+.calc-hint.show { display: block; }
+
+@media(max-width:600px){
+  .hero { padding: 40px 20px 28px; }
+  .controls { padding: 0 20px 20px; }
+  .topic-grid { margin: 0 20px; }
+  .topic-content { padding: 20px; }
+  .topic-header { padding: 10px 20px; gap: 10px; }
+  .topic-nav-tabs { display: none; }
+  .quiz-body { padding: 20px; }
+  .result-breakdown { grid-template-columns: 1fr; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* Mobile tab scroll */
+.topic-nav-tabs { overflow-x: auto; scrollbar-width: none; }
+.topic-nav-tabs::-webkit-scrollbar { display: none; }
+
+.fc-keyboard-hint { text-align: center; font-size: 11px; color: var(--muted); margin-top: -16px; margin-bottom: 16px; }
+
+/* Momentum topic fix */
+.topic-tile[data-tag="momentum"] { }
+
+/* Progress dots for flashcards */
+.fc-dots { display: flex; gap: 4px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+.fc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+.fc-dot.known { background: var(--green); }
+.fc-dot.missed { background: var(--red); }
+.fc-dot.current { background: var(--accent); }
+
+/* Energy resource table in notes */
+.resource-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.resource-table th { background: var(--accent-dim); color: var(--accent); padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; }
+.resource-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+.resource-table tr:last-child td { border-bottom: none; }
+.resource-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Radiation comparison */
+.rad-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+.rad-table th { background: rgba(255,255,255,0.05); padding: 8px 10px; text-align: left; font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.rad-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.rad-alpha { color: var(--red); }
+.rad-beta { color: var(--amber); }
+.rad-gamma { color: var(--purple); }
+</style>
+</head>
+<body>
+<!-- HOME VIEW -->
+<div id="home" class="view active">
+  <div class="hero">
+    <div class="hero-badge"><span></span>IGCSE · O-Level · 5054 / 0625</div>
+    <h1>Physics<br><em>Complete Crash Course</em></h1>
+    <p>Everything you need for an A* — 20 topics, formula pyramids, 120+ flashcards, MCQ practice, and a full exam-style quiz. Built from the Mojza & CAIE syllabus.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">20</div><div class="stat-label">Topics</div></div>
+      <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Formulas</div></div>
+      <div class="stat"><div class="stat-num">120+</div><div class="stat-label">Flashcards</div></div>
+      <div class="stat"><div class="stat-num">30</div><div class="stat-label">Quiz Questions</div></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="search-box"><span class="search-icon">⌕</span><input type="text" id="searchInput" placeholder="Search topics, keywords, formulas…" oninput="filterTopics()"></div>
+    <div class="filter-btns">
+      <button class="filter-btn active" onclick="filterByTag('all',this)">All</button>
+      <button class="filter-btn" onclick="filterByTag('mech',this)">Mechanics</button>
+      <button class="filter-btn" onclick="filterByTag('energy',this)">Energy</button>
+      <button class="filter-btn" onclick="filterByTag('thermal',this)">Thermal</button>
+      <button class="filter-btn" onclick="filterByTag('waves',this)">Waves</button>
+      <button class="filter-btn" onclick="filterByTag('elec',this)">Electricity</button>
+      <button class="filter-btn" onclick="filterByTag('nuclear',this)">Nuclear</button>
+    </div>
+    <button class="quiz-launch-btn" onclick="showQuizStart()">⚡ Take Full Quiz</button>
+  </div>
+  <div class="topic-grid" id="topicGrid"></div>
+  <div class="no-results-msg" id="noResults">No topics match. Try a different keyword.</div>
+</div>
+
+<!-- TOPIC FOCUS VIEW -->
+<div id="topic-view" class="view">
+  <div class="topic-header">
+    <button class="back-btn" onclick="showHome()">← All Topics</button>
+    <div class="topic-header-info">
+      <div class="topic-header-name" id="topicHeaderName">—</div>
+      <div class="topic-header-meta" id="topicHeaderMeta">—</div>
+    </div>
+    <div class="topic-nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('learn',this)">📖 Learn</button>
+      <button class="tab-btn" onclick="switchTab('formulas',this)">🔺 Formulas</button>
+      <button class="tab-btn" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('practice',this)">✏️ Practice</button>
+    </div>
+  </div>
+  <div class="topic-content">
+    <div class="tab-panel active" id="tab-learn"></div>
+    <div class="tab-panel" id="tab-formulas"></div>
+    <div class="tab-panel" id="tab-flashcards"></div>
+    <div class="tab-panel" id="tab-practice"></div>
+  </div>
+</div>
+
+<!-- QUIZ START -->
+<div id="quiz-view" class="view">
+  <div id="quiz-start">
+    <div class="quiz-start-card">
+      <div class="qs-icon">⚡</div>
+      <div class="qs-title">Full Exam Quiz</div>
+      <div class="qs-desc">25 MCQs + 5 calculation questions drawn from all 20 topics. Timed. Explained answers. Just like the real paper.</div>
+      <div class="qs-stats">
+        <div class="qs-stat"><div class="qs-stat-n">30</div><div class="qs-stat-l">Questions</div></div>
+        <div class="qs-stat"><div class="qs-stat-n">40</div><div class="qs-stat-l">Min Timer</div></div>
+        <div class="qs-stat"><div class="qs-stat-n">100%</div><div class="qs-stat-l">Explained</div></div>
+      </div>
+      <button class="qs-start-btn" onclick="startQuiz()">Start Quiz →</button>
+      <p style="margin-top:16px;font-size:12px;color:var(--muted);">Or <span style="color:var(--accent);cursor:pointer" onclick="showHome()">go back to topics</span></p>
+    </div>
+  </div>
+  <div id="quiz-active" style="display:none;">
+    <div class="quiz-header">
+      <button class="quiz-exit-btn" onclick="confirmExitQuiz()">✕ Exit</button>
+      <div class="quiz-title">Physics Quiz</div>
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+        <div class="quiz-q-counter" id="quizCounter">Question 1 of 30</div>
+      </div>
+      <div class="quiz-timer" id="quizTimer">40:00</div>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-question-area" id="quizQuestionArea"></div>
+      <div class="calc-wrap">
+        <div class="calc">
+          <div class="calc-header">🔢 Calculator</div>
+          <div class="calc-display">
+            <div class="calc-prev" id="calcPrev"></div>
+            <div class="calc-current" id="calcCurrent">0</div>
+          </div>
+          <div class="calc-btns">
+            <button class="calc-btn clr span2" onclick="calcClear()">AC</button>
+            <button class="calc-btn op" onclick="calcOp('del')">⌫</button>
+            <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+            <button class="calc-btn" onclick="calcNum('7')">7</button>
+            <button class="calc-btn" onclick="calcNum('8')">8</button>
+            <button class="calc-btn" onclick="calcNum('9')">9</button>
+            <button class="calc-btn op" onclick="calcOp('*')">×</button>
+            <button class="calc-btn" onclick="calcNum('4')">4</button>
+            <button class="calc-btn" onclick="calcNum('5')">5</button>
+            <button class="calc-btn" onclick="calcNum('6')">6</button>
+            <button class="calc-btn op" onclick="calcOp('-')">−</button>
+            <button class="calc-btn" onclick="calcNum('1')">1</button>
+            <button class="calc-btn" onclick="calcNum('2')">2</button>
+            <button class="calc-btn" onclick="calcNum('3')">3</button>
+            <button class="calc-btn op" onclick="calcOp('+')">+</button>
+            <button class="calc-btn span2" onclick="calcNum('0')">0</button>
+            <button class="calc-btn" onclick="calcNum('.')">.</button>
+            <button class="calc-btn eq" onclick="calcEquals()">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT VIEW -->
+<div id="result-view" class="view">
+  <div class="result-card">
+    <div class="result-score-ring">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="14"/>
+        <circle cx="80" cy="80" r="68" fill="none" stroke="url(#resultGrad)" stroke-width="14" stroke-linecap="round" id="resultCircle" stroke-dasharray="427" stroke-dashoffset="427"/>
+        <defs><linearGradient id="resultGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#7c83f5"/><stop offset="100%" style="stop-color:#c084fc"/></linearGradient></defs>
+      </svg>
+      <div class="result-score-num">
+        <div class="result-pct" id="resultPct">0%</div>
+        <div class="result-label">Score</div>
+      </div>
+    </div>
+    <div class="result-grade" id="resultGrade">—</div>
+    <div class="result-message" id="resultMessage">—</div>
+    <div class="result-breakdown">
+      <div class="breakdown-item"><div class="breakdown-num" id="resCorrNum" style="color:var(--green)">0</div><div class="breakdown-label">Correct</div></div>
+      <div class="breakdown-item"><div class="breakdown-num" id="resWrongNum" style="color:var(--red)">0</div><div class="breakdown-label">Wrong</div></div>
+      <div class="breakdown-item"><div class="breakdown-num" id="resTimeNum" style="color:var(--amber)">—</div><div class="breakdown-label">Time Left</div></div>
+    </div>
+    <div class="result-btns">
+      <button class="result-btn primary" onclick="showQuizStart()">Retry Quiz</button>
+      <button class="result-btn secondary" onclick="showHome()">Back to Topics</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// TOPIC DATA
+// ═══════════════════════════════════════════════════════════════
+const TOPICS = [
+{
+  id:'measurements', num:'01', name:'Physical Quantities & Measurement', tag:'mech', tagLabel:'Mechanics',
+  keywords:'units si scalar vector vernier micrometer zero error significant figures prefixes',
+  points:[
+    'The <strong>SI base units</strong> are: kilogram (kg), metre (m), second (s), ampere (A), kelvin (K).',
+    '<strong>Scalar quantities</strong> have magnitude only: speed, distance, mass, time, energy, temperature.',
+    '<strong>Vector quantities</strong> have magnitude AND direction: velocity, displacement, force, acceleration, momentum, weight.',
+    'A <strong>metre rule</strong> measures 1 cm–1 m. A <strong>vernier caliper</strong> measures to 0.1 mm. A <strong>micrometer screw gauge</strong> measures to 0.01 mm.',
+    '<strong>Zero error</strong>: when an instrument gives a non-zero reading when the true value is zero. Always correct for it — subtract a positive zero error from every reading.',
+    '<strong>Random errors</strong> vary unpredictably; reduce by taking multiple readings and averaging. <strong>Systematic errors</strong> shift all readings the same way (e.g. zero error).',
+    'To add <strong>perpendicular vectors</strong>, use Pythagoras: R = √(a² + b²). For angle: θ = tan⁻¹(opposite/adjacent).',
+    'Prefix chain: n(10⁻⁹), μ(10⁻⁶), m(10⁻³), [base], k(10³), M(10⁶), G(10⁹).',
+    'To measure volume of an <strong>irregular solid</strong>: use displacement method in a measuring cylinder. V = V_final − V_initial.',
+    'For timing experiments, always time 20 oscillations and divide by 20 to reduce <strong>reaction time error</strong>.'
+  ],
+  mistakes:[
+    'Forgetting to subtract zero error from micrometer readings',
+    'Confusing distance (scalar) and displacement (vector)',
+    'Adding vectors as if they were scalars — always use Pythagoras for perpendicular vectors',
+    'Not converting units before substituting (e.g. g→kg, cm→m)'
+  ],
+  tips:[
+    'Scalars add like normal numbers. Vectors need geometry.',
+    'If the question says "perpendicular forces of 3N and 4N", answer is 5N immediately (3-4-5 triangle).',
+    'Always state units in every answer — examiners deduct marks without them.'
+  ],
+  formulas:[
+    {name:'Speed', main:'v = d / t', forms:['v = d / t','d = v × t','t = d / v'], vars:['v','d','t'], units:'m/s, m, s', example:{q:'A car travels 240 m in 8 s. Find its speed.',a:'v = d/t = 240/8 = 30 m/s'}},
+    {name:'Vector Resultant (Pythagoras)', main:'R = √(a² + b²)', forms:['R = √(a² + b²)', 'θ = tan⁻¹(b/a)'], vars:['R','a','b'], units:'Same as component forces (N)', example:{q:'Forces of 6N and 8N act at 90°. Find resultant.',a:'R = √(6² + 8²) = √(36+64) = √100 = 10 N'}}
+  ],
+  flashcards:[
+    {q:'What does a vernier caliper measure to?', a:'0.1 mm'},
+    {q:'What does a micrometer screw gauge measure to?', a:'0.01 mm'},
+    {q:'Give 4 examples of scalar quantities.', a:'Speed, distance, mass, time (also: energy, temperature)'},
+    {q:'Give 4 examples of vector quantities.', a:'Velocity, displacement, force, acceleration (also: momentum, weight)'},
+    {q:'What is a systematic error? Give one example.', a:'An error that shifts all readings by the same amount in the same direction. Example: zero error on a micrometer.'},
+    {q:'How do you find the volume of an irregular solid?', a:'Displacement method: V_object = V_final − V_initial (using a measuring cylinder of water)'},
+    {q:'Two perpendicular forces are 5N and 12N. What is the resultant?', a:'R = √(5² + 12²) = √(25+144) = √169 = 13 N'},
+    {q:'Convert 5.6 km to metres.', a:'5.6 × 1000 = 5600 m'}
+  ],
+  mcqs:[
+    {q:'A micrometer has a zero error of +0.04 mm. It reads 3.28 mm. The actual diameter is:', opts:['3.32 mm','3.24 mm','3.28 mm','3.26 mm'], ans:1, exp:'Actual = reading − zero error = 3.28 − 0.04 = 3.24 mm'},
+    {q:'Which of the following is a vector quantity?', opts:['Mass','Temperature','Velocity','Distance'], ans:2, exp:'Velocity has both magnitude AND direction, making it a vector. Mass, temperature and distance are all scalars.'},
+    {q:'Two forces of 3N and 4N act at 90° to each other. The magnitude of the resultant is:', opts:['1 N','7 N','5 N','12 N'], ans:2, exp:'Pythagoras: R = √(3² + 4²) = √(9+16) = √25 = 5 N'},
+    {q:'To reduce random error in timing a pendulum, a student should:', opts:['Use a heavier pendulum','Time 1 oscillation very carefully','Time 20 oscillations and divide by 20','Use a shorter string'], ans:2, exp:'Timing multiple oscillations reduces the effect of human reaction time (random error) since you divide the total time by the number of oscillations.'}
+  ]
+},
+{
+  id:'motion', num:'02', name:'Motion (Kinematics)', tag:'mech', tagLabel:'Mechanics',
+  keywords:'suvat acceleration velocity speed distance displacement graphs terminal velocity freefall',
+  points:[
+    '<strong>Distance</strong> is the total path length (scalar). <strong>Displacement</strong> is the straight-line distance in a specific direction (vector).',
+    '<strong>Speed</strong> = distance/time (scalar). <strong>Velocity</strong> = displacement/time (vector).',
+    '<strong>Acceleration</strong> = Δv/t = (v−u)/t. Negative acceleration (deceleration) means slowing down. SI unit: m/s².',
+    '<strong>Distance-time graph</strong>: slope = speed. Horizontal line = stationary. Curve upward = accelerating. Curve flattening = decelerating.',
+    '<strong>Velocity-time graph</strong>: slope = acceleration. Horizontal = constant velocity. Area under graph = distance travelled.',
+    '<strong>SUVAT</strong>: v = u + at | s = ut + ½at² | v² = u² + 2as | s = ½(u+v)t. Use when acceleration is constant.',
+    '<strong>Free fall</strong>: objects accelerate at g ≈ 10 m/s² downward (ignoring air resistance). All masses fall identically.',
+    '<strong>Terminal velocity</strong>: reached when drag force = weight. Net force = 0, acceleration = 0, velocity is constant.',
+    'On a velocity-time graph, a <strong>curved line approaching horizontal</strong> shows an object reaching terminal velocity.',
+    'Uniform acceleration: v-t graph is a straight line. Non-uniform: curved line.'
+  ],
+  mistakes:[
+    'Using distance instead of displacement in velocity formula',
+    'Forgetting area under v-t graph = distance (not velocity)',
+    'Thinking "terminal velocity" means the object stopped — it means constant speed',
+    'Not defining a positive direction before solving SUVAT (if up is +ve, then g = −10 m/s²)'
+  ],
+  tips:[
+    'To identify which SUVAT to use: list u, v, a, s, t — pick the equation with the 4 you know/want.',
+    'If an object is thrown upward, at the top: v = 0 (momentarily). Use this to find max height.',
+    'Area under graph: split into triangles and rectangles, add all areas.'
+  ],
+  formulas:[
+    {name:'Acceleration', main:'a = (v − u) / t', forms:['a = (v−u)/t','v = u + at','u = v − at','t = (v−u)/a'], vars:['a','v','u','t'], units:'m/s²', example:{q:'A car goes from 5 m/s to 25 m/s in 4 s. Find acceleration.',a:'a = (25−5)/4 = 20/4 = 5 m/s²'}},
+    {name:'SUVAT — Distance', main:'s = ut + ½at²', forms:['s = ut + ½at²','s = ½(u+v)t','v² = u²+2as'], vars:['s','u','t','a'], units:'metres (m)', example:{q:'From rest, a = 4 m/s² for 3 s. Find distance.',a:'s = 0(3) + ½(4)(3²) = 0 + 18 = 18 m'}},
+    {name:'Speed', main:'v = d / t', forms:['v = d/t','d = v×t','t = d/v'], vars:['v','d','t'], units:'m/s', example:{q:'A runner covers 400 m in 50 s. Find speed.',a:'v = 400/50 = 8 m/s'}}
+  ],
+  flashcards:[
+    {q:'What does the gradient of a distance-time graph represent?', a:'Speed'},
+    {q:'What does the area under a speed-time graph represent?', a:'Distance travelled'},
+    {q:'What does a horizontal line on a velocity-time graph mean?', a:'Constant velocity (zero acceleration)'},
+    {q:'Define terminal velocity.', a:'The constant velocity reached when drag force exactly equals the weight of the falling object, so net force = 0 and acceleration = 0.'},
+    {q:'State the four SUVAT equations.', a:'v=u+at | s=ut+½at² | v²=u²+2as | s=½(u+v)t'},
+    {q:'What is the acceleration due to gravity near Earth\'s surface?', a:'g ≈ 9.8 m/s² (use 10 m/s² in calculations unless told otherwise)'},
+    {q:'A ball dropped from rest. After 3 s (g=10), what is its velocity?', a:'v = u + at = 0 + 10×3 = 30 m/s downward'},
+    {q:'What does a curve of increasing gradient on a d-t graph represent?', a:'Increasing speed (acceleration)'}
+  ],
+  mcqs:[
+    {q:'A car accelerates uniformly from rest at 5 m/s². How far does it travel in 4 seconds?', opts:['20 m','40 m','80 m','10 m'], ans:1, exp:'s = ut + ½at² = 0 + ½(5)(16) = 40 m'},
+    {q:'On a velocity-time graph, a horizontal straight line indicates:', opts:['Constant acceleration','Increasing speed','Zero velocity','Constant velocity'], ans:3, exp:'Horizontal = gradient zero = acceleration zero = constant velocity.'},
+    {q:'At terminal velocity, the resultant force on a falling object is:', opts:['Equal to weight','Greater than drag','Zero','Less than zero'], ans:2, exp:'At terminal velocity, drag = weight, so resultant force = weight − drag = 0.'},
+    {q:'A ball is thrown upward at 20 m/s. Using g = 10 m/s², how long does it take to reach maximum height?', opts:['4 s','1 s','3 s','2 s'], ans:3, exp:'At max height v=0. t = (v−u)/a = (0−20)/(−10) = 2 s'}
+  ]
+},
+{
+  id:'mass-weight', num:'03', name:'Mass and Weight', tag:'mech', tagLabel:'Mechanics',
+  keywords:'mass weight gravity gravitational field strength inertia centre of gravity stability',
+  points:[
+    '<strong>Mass</strong> (kg): the amount of matter in an object. Does NOT change with location. Measured with a balance.',
+    '<strong>Weight</strong> (N): the gravitational force acting on a mass. Changes with location. Acts vertically downward. Measured with a newton-meter/spring balance.',
+    'Gravitational field strength <strong>g</strong> = 10 N/kg on Earth, ≈ 1.6 N/kg on the Moon. W = mg.',
+    '<strong>Inertia</strong>: the resistance of an object to a change in its state of motion. Directly proportional to mass — heavier objects are harder to accelerate or stop.',
+    'The <strong>centre of gravity</strong> (or centre of mass) is the point where the object\'s weight appears to act. For uniform shapes, it\'s at the geometric centre.',
+    'An object is <strong>stable</strong> if its centre of gravity lies directly above its base. It topples if the vertical line of action of weight falls outside the base.',
+    '<strong>Stability increases</strong> when: (1) centre of gravity is lower, (2) base area is wider.',
+    'To find the centre of gravity of an irregular lamina: suspend from a point, hang a plumb line, draw a line. Repeat from another point. The intersection is the centre of gravity.',
+    'On the Moon, your <strong>mass stays the same</strong> but your weight is about 1/6 of what it is on Earth.',
+    'Gravitational field strength = Weight / Mass. Unit: N/kg.'
+  ],
+  mistakes:[
+    'Confusing mass (stays same everywhere) with weight (changes with g)',
+    'Saying "weigh 60 kg" — correct is "mass of 60 kg, weight of 600 N"',
+    'Forgetting weight acts VERTICALLY downward, not perpendicular to surface on slopes',
+    'Saying stability improves by increasing height — it actually worsens!'
+  ],
+  tips:[
+    'Simple rule: mass = matter (constant); weight = gravitational pull (varies).',
+    'On the Moon: same mass, weight = (1/6) × Earth weight.',
+    'For stability questions: draw the line of action of weight — if it falls outside base, it topples.'
+  ],
+  formulas:[
+    {name:'Weight', main:'W = m × g', forms:['W = m × g','m = W / g','g = W / m'], vars:['W','m','g'], units:'N, kg, N/kg', example:{q:'Find the weight of a 70 kg person on Earth (g = 10 N/kg).',a:'W = 70 × 10 = 700 N'}}
+  ],
+  flashcards:[
+    {q:'What is the difference between mass and weight?', a:'Mass = amount of matter (scalar, constant, kg). Weight = gravitational force on the mass (vector, varies with g, N).'},
+    {q:'What is gravitational field strength on Earth?', a:'g = 10 N/kg (or 9.8 N/kg more precisely)'},
+    {q:'A 50 kg object on the Moon (g=1.6 N/kg). What is its weight?', a:'W = 50 × 1.6 = 80 N'},
+    {q:'Define inertia.', a:'The resistance of an object to any change in its state of rest or motion. Greater mass → greater inertia.'},
+    {q:'How do you find the centre of gravity of an irregular lamina?', a:'Suspend it from two different points. For each, hang a plumb line and mark where it hangs. The intersection of the two lines is the centre of gravity.'},
+    {q:'How does lowering the centre of gravity affect stability?', a:'It increases stability — the object is harder to topple.'}
+  ],
+  mcqs:[
+    {q:'An astronaut has a mass of 80 kg on Earth. On the Moon where g = 1.6 N/kg, her weight is:', opts:['80 N','128 N','800 N','800 kg'], ans:1, exp:'W = mg = 80 × 1.6 = 128 N. Note: mass stays 80 kg everywhere.'},
+    {q:'Which statement about weight is correct?', opts:['Weight is a scalar','Weight acts horizontally','Weight changes with location','Weight is measured in kg'], ans:2, exp:'Weight = mg. Since g changes with location, so does weight. Weight is a vector force measured in Newtons.'},
+    {q:'A racing car has a very wide wheelbase and a low engine. This design improves stability because:', opts:['It increases the mass','It lowers the centre of gravity AND widens the base','It reduces friction','It increases speed'], ans:1, exp:'Both a lower centre of gravity and a wider base area increase stability.'}
+  ]
+},
+{
+  id:'density', num:'04', name:'Density', tag:'mech', tagLabel:'Mechanics',
+  keywords:'density mass volume floating sinking upthrust archimedes displacement liquid',
+  points:[
+    '<strong>Density</strong> = mass per unit volume. Symbol ρ (rho). Unit: kg/m³ or g/cm³.',
+    'Density of water = 1000 kg/m³ = 1 g/cm³. This is a key reference value.',
+    'An object <strong>floats</strong> if its average density < density of the liquid it\'s in.',
+    'An object <strong>sinks</strong> if its average density > density of the liquid.',
+    'The <strong>upthrust</strong> (buoyant force) on an object = weight of fluid displaced.',
+    'For regularly shaped objects: measure dimensions and calculate volume mathematically.',
+    'For irregularly shaped objects: use <strong>water displacement</strong> in a measuring cylinder. V_object = V_final − V_initial.',
+    'Always ensure the object is <strong>fully submerged</strong> in the displacement method.',
+    'To convert density from g/cm³ to kg/m³: multiply by 1000 (e.g. 1 g/cm³ = 1000 kg/m³).',
+    'If two immiscible liquids are mixed, the <strong>less dense liquid floats</strong> on top.'
+  ],
+  mistakes:[
+    'Forgetting to convert units (g→kg, cm³→m³) before calculating',
+    'Not fully submerging the object in the displacement method',
+    'Confusing "floats" with "dissolves" — density determines floating, not solubility',
+    'Using the wrong formula — it\'s ρ = m/V, not m/ρ = V (use the triangle!)'
+  ],
+  tips:[
+    'ρ = m/V. Cover the quantity you want in the triangle: top = ρ, bottom-left = m, bottom-right = V.',
+    'Quick check: if density < 1 g/cm³, it floats in water. If > 1 g/cm³, it sinks.',
+    '1 cm³ = 1 mL = 10⁻⁶ m³. Always convert before using kg/m³.'
+  ],
+  formulas:[
+    {name:'Density', main:'ρ = m / V', forms:['ρ = m / V','m = ρ × V','V = m / ρ'], vars:['ρ','m','V'], units:'kg/m³, kg, m³', example:{q:'A 500 g object has volume 250 cm³. Find density.',a:'ρ = 0.5 / (250×10⁻⁶) = 0.5/0.00025 = 2000 kg/m³'}}
+  ],
+  flashcards:[
+    {q:'What is the density of water?', a:'1000 kg/m³ or 1 g/cm³'},
+    {q:'A 200 g object has volume 50 cm³. Is it denser or less dense than water?', a:'ρ = 0.2 kg / 50×10⁻⁶ m³ = 4000 kg/m³. Much denser than water → it sinks.'},
+    {q:'How do you measure the volume of an irregular solid?', a:'Displacement: put water in measuring cylinder, note volume V₁, submerge object fully, note new volume V₂. Volume = V₂ − V₁.'},
+    {q:'An object floats. What does this tell you about its density?', a:'Its average density is less than the density of the liquid it\'s floating in.'},
+    {q:'Convert 2.5 g/cm³ to kg/m³.', a:'2.5 × 1000 = 2500 kg/m³'},
+    {q:'What is upthrust?', a:'The upward force exerted by a fluid on a submerged or floating object, equal to the weight of fluid displaced.'}
+  ],
+  mcqs:[
+    {q:'A piece of metal has a mass of 540 g and a volume of 200 cm³. Its density in kg/m³ is:', opts:['2700','0.37','2.7','27000'], ans:0, exp:'ρ = 0.54 kg / (200×10⁻⁶ m³) = 0.54/0.0002 = 2700 kg/m³'},
+    {q:'An object of density 800 kg/m³ is placed in water (density 1000 kg/m³). It will:', opts:['Sink to the bottom','Float with part above water','Be fully submerged but stationary in middle','Dissolve'], ans:1, exp:'800 < 1000, so average density is less than water → object floats with some fraction above the surface.'},
+    {q:'The displacement method is used for irregular solids because:', opts:['It is faster','Their volume cannot be calculated mathematically','They are always less dense than water','They have no definite shape'], ans:1, exp:'Irregular solids don\'t have a simple formula for volume, so displacement is the only practical method.'}
+  ]
+},
+{
+  id:'forces', num:'05', name:'Forces, Hooke\'s Law & Moments', tag:'mech', tagLabel:'Mechanics',
+  keywords:'newton laws friction resultant moments turning hookes law spring extension pivot equilibrium',
+  points:[
+    '<strong>Newton\'s 1st Law</strong>: An object stays at rest or moves at constant velocity unless acted on by a resultant force.',
+    '<strong>Newton\'s 2nd Law</strong>: Resultant force = mass × acceleration (F = ma). Direction of acceleration = direction of net force.',
+    '<strong>Newton\'s 3rd Law</strong>: Every action has an equal and opposite reaction acting on DIFFERENT objects of the SAME type.',
+    '<strong>Friction</strong> opposes relative motion. Air resistance (drag) is friction with air. Both convert kinetic energy to thermal energy.',
+    '<strong>Hooke\'s Law</strong>: Extension is directly proportional to force, provided the limit of proportionality is not exceeded. F = ke.',
+    'A load-extension graph shows a straight line (Hooke\'s Law obeyed) then curves (limit exceeded).',
+    '<strong>Moment</strong> = Force × perpendicular distance from pivot. Unit: N·m.',
+    '<strong>Principle of Moments</strong>: For equilibrium, sum of clockwise moments = sum of anticlockwise moments.',
+    '<strong>Circular motion</strong>: even at constant speed, an object in a circle is always accelerating toward the centre (centripetal acceleration).',
+    'Thinking distance depends on driver reaction time. Braking distance depends on road conditions, speed, and braking force.'
+  ],
+  mistakes:[
+    'Newton\'s 3rd Law pairs MUST be: same type, same magnitude, opposite direction, different objects',
+    'Moment uses PERPENDICULAR distance from pivot — not the length of the arm along the surface',
+    'Equilibrium means resultant FORCE = 0 AND resultant MOMENT = 0 (both must be zero)',
+    'Hooke\'s Law only applies UP TO the limit of proportionality, not beyond'
+  ],
+  tips:[
+    'N3 quick check: "foot pushes ground down → ground pushes foot up." Both are contact forces.',
+    'For moments: anticlockwise = positive, clockwise = negative (or vice versa, be consistent).',
+    'F = ke: k is the spring constant (stiffness). Larger k = stiffer spring.'
+  ],
+  formulas:[
+    {name:'Newton\'s 2nd Law', main:'F = m × a', forms:['F = m × a','m = F / a','a = F / m'], vars:['F','m','a'], units:'N, kg, m/s²', example:{q:'A 5 kg box accelerates at 3 m/s². Find net force.',a:'F = 5 × 3 = 15 N'}},
+    {name:'Hooke\'s Law', main:'F = k × e', forms:['F = k × e','k = F / e','e = F / k'], vars:['F','k','e'], units:'N, N/m, m', example:{q:'A spring (k=200 N/m) is extended by 0.15 m. Find force.',a:'F = 200 × 0.15 = 30 N'}},
+    {name:'Moment', main:'M = F × d', forms:['M = F × d','F = M / d','d = M / F'], vars:['M','F','d'], units:'N·m, N, m', example:{q:'Find moment: 25N force, 0.4m from pivot.',a:'M = 25 × 0.4 = 10 N·m'}}
+  ],
+  flashcards:[
+    {q:'State Newton\'s First Law.', a:'An object will remain at rest or in uniform motion in a straight line unless acted upon by a resultant external force.'},
+    {q:'State Newton\'s Third Law and give an example.', a:'Every action has an equal and opposite reaction on a DIFFERENT object. Example: a rocket pushes gas backward → gas pushes rocket forward.'},
+    {q:'What is the principle of moments?', a:'For an object in equilibrium: sum of clockwise moments = sum of anticlockwise moments about any point.'},
+    {q:'State Hooke\'s Law.', a:'The extension of a spring is directly proportional to the applied force, provided the limit of proportionality is not exceeded.'},
+    {q:'A 300 N force acts 2 m from a pivot. What is the moment?', a:'M = F × d = 300 × 2 = 600 N·m'},
+    {q:'What two conditions must be true for an object to be in equilibrium?', a:'(1) Resultant force = 0. (2) Resultant moment = 0.'},
+    {q:'Why is a door handle placed far from the hinge?', a:'Greater perpendicular distance → greater moment for the same force → easier to open (less force needed).'},
+    {q:'What does a curved line on a force-extension graph indicate?', a:'The limit of proportionality has been exceeded. Hooke\'s Law no longer applies.'}
+  ],
+  mcqs:[
+    {q:'A 1200 kg car has a resultant force of 2400 N acting on it. Its acceleration is:', opts:['4800 m/s²','2 m/s²','0.5 m/s²','2400 m/s²'], ans:1, exp:'a = F/m = 2400/1200 = 2 m/s²'},
+    {q:'A 40 N weight hangs 0.3 m from a pivot. A 30 N force acts on the other side. To achieve equilibrium, the 30 N force must act at what distance from the pivot?', opts:['0.2 m','0.4 m','0.9 m','0.3 m'], ans:1, exp:'Clockwise M = 40 × 0.3 = 12 N·m. Anticlockwise: 30 × d = 12 → d = 0.4 m'},
+    {q:'A spring stretches 4 cm when a 20 N force is applied. Its spring constant is:', opts:['0.002 N/m','80 N/m','500 N/m','5 N/m'], ans:2, exp:'k = F/e = 20/0.04 = 500 N/m'},
+    {q:'Newton\'s 3rd Law force pairs always act on:', opts:['The same object in opposite directions','Different objects','The same object in the same direction','Different objects at different times'], ans:1, exp:'N3 force pairs: equal, opposite, same type, DIFFERENT objects — never on the same object.'}
+  ]
+},
+{
+  id:'momentum', num:'06', name:'Momentum & Impulse', tag:'mech', tagLabel:'Mechanics',
+  keywords:'momentum mass velocity conservation collision impulse force time change',
+  points:[
+    '<strong>Momentum</strong> = mass × velocity. Symbol p. Unit: kg·m/s. It is a vector quantity.',
+    '<strong>Conservation of momentum</strong>: in the absence of external forces, total momentum before = total momentum after a collision.',
+    'Moving right = positive momentum. Moving left = negative momentum (choose a direction as positive).',
+    '<strong>Impulse</strong> = force × time = change in momentum. Impulse = F × t = mv − mu.',
+    'A larger time interval for the same change in momentum means <strong>smaller average force</strong>. This is why airbags, crash mats, and crumple zones work.',
+    'In an elastic collision, both momentum AND kinetic energy are conserved.',
+    'In an inelastic collision, momentum is conserved but kinetic energy is not (some converts to heat/sound).',
+    'If objects stick together after collision, it\'s a <strong>perfectly inelastic</strong> collision.',
+    'Rocket propulsion: hot gases expelled backward (momentum), rocket moves forward (equal and opposite momentum change) — Newton\'s 3rd Law.',
+    'Total momentum of an isolated system is always constant (law of conservation of momentum).'
+  ],
+  mistakes:[
+    'Forgetting momentum is a VECTOR — assign direction signs correctly',
+    'Using conservation of momentum without checking for external forces (must be absent)',
+    'Confusing impulse (F×t) with work (F×d) — different things!',
+    'In collision questions, not including objects at rest (they have p=0, still count)'
+  ],
+  tips:[
+    'For collision problems: total p_before = total p_after. Write direction as + or −.',
+    'Impulse = area under a force-time graph.',
+    'A longer collision time reduces the force — safety devices exploit this principle.'
+  ],
+  formulas:[
+    {name:'Momentum', main:'p = m × v', forms:['p = m × v','m = p / v','v = p / m'], vars:['p','m','v'], units:'kg·m/s, kg, m/s', example:{q:'A 2 kg ball moves at 8 m/s. Find its momentum.',a:'p = 2 × 8 = 16 kg·m/s'}},
+    {name:'Impulse', main:'Ft = mv − mu', forms:['Ft = mv − mu','F = (mv−mu)/t','t = (mv−mu)/F'], vars:['F','t','m','v','u'], units:'N·s = kg·m/s', example:{q:'A 0.5 kg ball hits a wall at 6 m/s and bounces at 4 m/s. Contact time 0.01 s. Find force.',a:'F = m(v−u)/t = 0.5(−4−6)/0.01 = 0.5×(−10)/0.01 = −500 N (500 N from wall)'}}
+  ],
+  flashcards:[
+    {q:'Define momentum.', a:'Momentum = mass × velocity. It is a vector quantity. Unit: kg·m/s.'},
+    {q:'State the law of conservation of momentum.', a:'When no external force acts on a system, the total momentum remains constant. Total momentum before = total momentum after.'},
+    {q:'What is impulse? Give two equivalent expressions.', a:'Impulse = change in momentum = F × t = mv − mu. Unit: N·s or kg·m/s.'},
+    {q:'Why do cars have crumple zones?', a:'Crumple zones increase collision time (t↑). Since Ft = Δp and Δp is fixed, a larger t means smaller F → less force on passengers.'},
+    {q:'A 3 kg ball (5 m/s right) hits a 5 kg stationary ball. They stick together. Find final velocity.', a:'p_before = 3×5 + 5×0 = 15 kg·m/s. p_after = (3+5)v. v = 15/8 = 1.875 m/s to the right.'},
+    {q:'Is momentum a scalar or vector? How do you handle direction?', a:'Vector. Assign positive to one direction (e.g., right), negative to the opposite. Include signs in all calculations.'}
+  ],
+  mcqs:[
+    {q:'A 4 kg object moving at 6 m/s collides with a stationary 2 kg object. They stick together. Their final velocity is:', opts:['4 m/s','3 m/s','6 m/s','2 m/s'], ans:0, exp:'p_before = 4×6 = 24 kg·m/s. p_after = (4+2)v = 6v. v = 24/6 = 4 m/s'},
+    {q:'A force of 50 N acts on a ball for 0.2 s. The change in momentum (impulse) is:', opts:['250 kg·m/s','0.004 kg·m/s','10 kg·m/s','50 kg·m/s'], ans:2, exp:'Impulse = F×t = 50 × 0.2 = 10 N·s = 10 kg·m/s'},
+    {q:'Airbags in cars reduce injury because they:', opts:['Reduce the change in momentum','Increase the force on the person','Increase the time over which the force acts','Decrease the time of collision'], ans:2, exp:'Airbags increase collision time t. Since Ft = Δp (fixed), larger t → smaller F. Less force = less injury.'}
+  ]
+},
+{
+  id:'energy', num:'07', name:'Energy, Work, Power & Resources', tag:'energy', tagLabel:'Energy',
+  keywords:'kinetic potential gravitational work power efficiency sankey renewable nonrenewable fossil solar wind',
+  points:[
+    '<strong>Work done</strong> = force × distance (in direction of force). Unit: Joules. No motion = no work done.',
+    '<strong>Conservation of energy</strong>: energy cannot be created or destroyed, only transferred or transformed. Total always constant.',
+    '<strong>KE</strong> = ½mv². Doubling speed → 4× KE. Tripling speed → 9× KE (velocity is SQUARED).',
+    '<strong>GPE</strong> = mgh. Depends on mass, gravitational field strength, and height above reference point.',
+    '<strong>Power</strong> = work done / time = energy transferred / time. Also P = Fv. Unit: Watts (W = J/s).',
+    '<strong>Efficiency</strong> = useful energy out / total energy in × 100%. Always less than 100% (energy wasted as heat, sound).',
+    '<strong>Sankey diagrams</strong>: width of arrows represents energy. Arrow going in = total input. Arrow going forward = useful. Arrow going down/sideways = wasted.',
+    '<strong>Renewable</strong> sources: solar, wind, hydroelectric, geothermal, tidal, wave, biofuel. Cannot run out.',
+    '<strong>Non-renewable</strong> sources: coal, oil, natural gas (fossil fuels), nuclear. Limited supply.',
+    'Fossil fuels produce CO₂ (global warming) and SO₂ (acid rain). Nuclear waste is radioactive and difficult to dispose of.'
+  ],
+  mistakes:[
+    'KE = ½mv² — forgetting the ½, or not squaring the velocity',
+    'Work = Fd only when force is PARALLEL to displacement. If at angle θ: W = Fd cosθ',
+    'Efficiency > 100% is IMPOSSIBLE — if your answer is >100%, recheck',
+    'Nuclear is NON-renewable (uranium runs out), but it is low-carbon'
+  ],
+  tips:[
+    'At the top of a ramp: all GPE. At the bottom: all KE (ideal). mgh = ½mv² (often used together).',
+    'Power of running: P = Fv where F is friction/resistance at constant speed.',
+    '"Geothermal, tidal, nuclear" — the three renewables/non-renewables NOT from the Sun.'
+  ],
+  formulas:[
+    {name:'Kinetic Energy', main:'KE = ½mv²', forms:['KE = ½mv²','m = 2KE/v²','v = √(2KE/m)'], vars:['KE','m','v'], units:'J, kg, m/s', example:{q:'A 2 kg ball moves at 6 m/s. Find KE.',a:'KE = ½ × 2 × 6² = ½ × 2 × 36 = 36 J'}},
+    {name:'Gravitational PE', main:'GPE = mgh', forms:['GPE = mgh','h = GPE/(mg)','m = GPE/(gh)'], vars:['GPE','m','g','h'], units:'J, kg, N/kg, m', example:{q:'10 kg box lifted 5 m. g=10. Find GPE.',a:'GPE = 10 × 10 × 5 = 500 J'}},
+    {name:'Work Done', main:'W = F × d', forms:['W = Fd','F = W/d','d = W/F'], vars:['W','F','d'], units:'J, N, m', example:{q:'300 N force moves object 4 m. Find work.',a:'W = 300 × 4 = 1200 J'}},
+    {name:'Power', main:'P = W / t', forms:['P = W/t','W = Pt','t = W/P'], vars:['P','W','t'], units:'W, J, s', example:{q:'800 J transferred in 40 s. Find power.',a:'P = 800/40 = 20 W'}},
+    {name:'Efficiency', main:'η = Eᵤ / Eᵢ × 100%', forms:['η = (useful out / total in) × 100%'], vars:['η','Eᵤ','Eᵢ'], units:'% (no unit)', example:{q:'Engine uses 5000 J, outputs 1500 J useful. Find efficiency.',a:'η = 1500/5000 × 100 = 30%'}}
+  ],
+  flashcards:[
+    {q:'A 3 kg ball rolls at 4 m/s. What is its KE?', a:'KE = ½ × 3 × 4² = ½ × 3 × 16 = 24 J'},
+    {q:'State the law of conservation of energy.', a:'Energy cannot be created or destroyed. It can only be transferred or transformed. The total energy of a closed system is constant.'},
+    {q:'What is the difference between renewable and non-renewable energy?', a:'Renewable: replenished naturally, won\'t run out (solar, wind, hydro). Non-renewable: limited supply, cannot be replaced quickly (coal, oil, gas, nuclear).'},
+    {q:'A motor lifts a 50 N box 3 m in 5 s. Find power.', a:'W = Fd = 50×3 = 150 J. P = W/t = 150/5 = 30 W'},
+    {q:'Speed doubles. KE changes by factor of:', a:'4 times. KE ∝ v². Doubling v → v² multiplied by 4 → KE × 4.'},
+    {q:'Name 3 energy resources NOT derived from the Sun.', a:'Geothermal, tidal, nuclear'},
+    {q:'What does a Sankey diagram show?', a:'Energy flow through a device. Arrow width = amount of energy. Shows input, useful output, and wasted energy (usually heat).'},
+    {q:'A device has 40% efficiency. If 2000 J is input, what is useful output?', a:'Useful output = 40% × 2000 = 800 J'}
+  ],
+  mcqs:[
+    {q:'A car of mass 1200 kg travels at 20 m/s. Its kinetic energy is:', opts:['24000 J','480000 J','240000 J','12000 J'], ans:2, exp:'KE = ½ × 1200 × 20² = ½ × 1200 × 400 = 240 000 J'},
+    {q:'A machine uses 6000 J and produces 4500 J of useful energy. Its efficiency is:', opts:['133%','25%','75%','57%'], ans:2, exp:'η = 4500/6000 × 100 = 75%'},
+    {q:'Which energy resource is NOT derived from the Sun?', opts:['Wind energy','Solar energy','Biofuel','Geothermal energy'], ans:3, exp:'Geothermal energy comes from radioactive decay and residual heat inside the Earth — not from solar radiation.'},
+    {q:'A 500 g ball drops from a height of 2 m (g=10). Its KE just before hitting the ground is:', opts:['10 J','1000 J','5 J','2500 J'], ans:0, exp:'GPE lost = mgh = 0.5 × 10 × 2 = 10 J. All converts to KE (assuming no air resistance) → KE = 10 J'}
+  ]
+},
+{
+  id:'pressure', num:'08', name:'Pressure', tag:'mech', tagLabel:'Mechanics',
+  keywords:'pressure force area liquid depth density hydraulic pascal barometer manometer atmospheric',
+  points:[
+    '<strong>Pressure</strong> = Force / Area. Unit: Pascals (Pa) = N/m². Smaller area → greater pressure for same force.',
+    '<strong>Liquid pressure</strong> = ρgh. Depends on fluid density, gravitational field strength, and depth. NOT on volume or container shape.',
+    'Liquid pressure acts <strong>equally in all directions</strong> at the same depth.',
+    '<strong>Hydraulic systems</strong> (Pascal\'s Principle): pressure is transmitted equally throughout a fluid. F₁/A₁ = F₂/A₂.',
+    'Hydraulic advantage: small force on small piston → same pressure → large force on large piston.',
+    '<strong>Atmospheric pressure</strong> ≈ 10⁵ Pa (100 000 Pa). It decreases with altitude.',
+    'A <strong>barometer</strong> measures atmospheric pressure using mercury in an inverted tube.',
+    'A <strong>manometer</strong> measures gas pressure by comparing with atmospheric pressure.',
+    'If the manometer liquid is higher on the gas side → gas pressure < atmospheric. Lower on gas side → gas pressure > atmospheric.',
+    'Objects in a fluid experience upthrust = weight of fluid displaced = ρ_fluid × V_submerged × g.'
+  ],
+  mistakes:[
+    'Using the wrong formula — P = F/A for solid-on-surface; P = ρgh for fluid pressure at depth',
+    'Using the volume of container for liquid pressure — only depth matters, not volume',
+    'In hydraulics, forgetting F₁/A₁ = F₂/A₂ — pressures are equal, forces are NOT',
+    'Not converting units (cm → m, g/cm³ → kg/m³) in ρgh calculations'
+  ],
+  tips:[
+    'Large area = less pressure. Snowshoes distribute weight over large area.',
+    'For hydraulics: P is the same everywhere, so F₁/A₁ = F₂/A₂.',
+    'ρgh: think "Rho-gee-height" — remember density × gravity × depth.'
+  ],
+  formulas:[
+    {name:'Pressure (Solid/Force)', main:'P = F / A', forms:['P = F / A','F = P × A','A = F / P'], vars:['P','F','A'], units:'Pa, N, m²', example:{q:'100 N force on area 0.05 m². Find pressure.',a:'P = 100/0.05 = 2000 Pa'}},
+    {name:'Liquid Pressure', main:'P = ρgh', forms:['P = ρgh','h = P/(ρg)','ρ = P/(gh)'], vars:['P','ρ','g','h'], units:'Pa, kg/m³, N/kg, m', example:{q:'Depth 3 m in water (ρ=1000). g=10. P=?',a:'P = 1000 × 10 × 3 = 30 000 Pa'}},
+    {name:'Hydraulics', main:'F₁/A₁ = F₂/A₂', forms:['F₁/A₁ = F₂/A₂','F₂ = F₁ × A₂/A₁'], vars:['F','A'], units:'N, m²', example:{q:'F₁=20N, A₁=0.01m², A₂=0.05m². Find F₂.',a:'F₂ = 20 × 0.05/0.01 = 100 N'}}
+  ],
+  flashcards:[
+    {q:'Why does a knife cut better when sharpened?', a:'Sharper edge = smaller area. P = F/A. Smaller A → greater pressure for same force → cuts more easily.'},
+    {q:'Does liquid pressure depend on the volume of the liquid?', a:'No. P = ρgh — only density, g, and DEPTH matter. Container shape and volume don\'t affect pressure at a given depth.'},
+    {q:'State Pascal\'s Principle.', a:'Pressure applied to an enclosed fluid is transmitted equally in all directions throughout the fluid.'},
+    {q:'Find pressure at 8 m depth in seawater (ρ=1030 kg/m³, g=10 N/kg).', a:'P = ρgh = 1030 × 10 × 8 = 82 400 Pa'},
+    {q:'In a hydraulic press, if piston A has area 0.02 m² and piston B has area 0.1 m², a 40 N force on A produces what force on B?', a:'F₂ = F₁ × A₂/A₁ = 40 × 0.1/0.02 = 200 N'},
+    {q:'What does a barometer measure? What liquid is usually used?', a:'Atmospheric pressure. Usually uses mercury (dense, low vapour pressure).'}
+  ],
+  mcqs:[
+    {q:'A 600 N force acts on an area of 0.03 m². The pressure is:', opts:['18 Pa','20 000 Pa','0.00005 Pa','6000 Pa'], ans:1, exp:'P = F/A = 600/0.03 = 20 000 Pa'},
+    {q:'In a hydraulic system, piston A (area 0.01 m²) has a force of 50 N applied. The pressure transmitted to piston B (area 0.05 m²) produces a force of:', opts:['10 N','250 N','1000 N','2500 N'], ans:1, exp:'P = 50/0.01 = 5000 Pa. F₂ = P × A₂ = 5000 × 0.05 = 250 N'},
+    {q:'Liquid pressure at a certain depth depends on:', opts:['Volume of liquid and density','Density and depth only','Shape of container and depth','Volume and depth'], ans:1, exp:'P = ρgh. Only density (ρ) and depth (h) matter (g is constant). Volume and shape are irrelevant.'}
+  ]
+},
+{
+  id:'kinetic', num:'09', name:'Kinetic Model of Matter', tag:'thermal', tagLabel:'Thermal',
+  keywords:'kinetic particle theory states solid liquid gas brownian motion boyle charles pressure law temperature kelvin evaporation',
+  points:[
+    'All matter consists of particles in constant random motion. Higher temperature → faster particles → more kinetic energy.',
+    '<strong>Solid</strong>: particles packed closely in regular lattice, vibrate about fixed positions. Fixed shape and volume, high density, incompressible.',
+    '<strong>Liquid</strong>: particles close but randomly arranged, free to slide past each other. Fixed volume, no fixed shape, less dense than solid.',
+    '<strong>Gas</strong>: particles far apart, move randomly at high speed (Brownian motion). No fixed shape/volume, very low density, easily compressed.',
+    '<strong>Brownian motion</strong>: random, erratic motion of particles visible under microscope (e.g. smoke in air). Evidence for the kinetic model.',
+    '<strong>Absolute zero</strong> = −273°C = 0 K. At this temperature, particles have minimum kinetic energy (effectively no motion).',
+    'Convert: T(K) = T(°C) + 273. ALWAYS use Kelvin in gas law calculations.',
+    '<strong>Boyle\'s Law</strong> (constant T): P₁V₁ = P₂V₂. Pressure and volume are inversely proportional.',
+    '<strong>Charles\'s Law</strong> (constant P): V₁/T₁ = V₂/T₂. Volume proportional to absolute temperature.',
+    '<strong>Pressure Law</strong> (constant V): P₁/T₁ = P₂/T₂. Pressure proportional to absolute temperature.'
+  ],
+  mistakes:[
+    'MOST COMMON: Using °C instead of Kelvin in gas law equations. ALWAYS convert to K first.',
+    'Evaporation ≠ boiling. Evaporation occurs at surface at any temp. Boiling occurs throughout at fixed temp.',
+    'Saying pressure of gas depends on gravity — it doesn\'t. P comes from particle collisions.',
+    'Brownian motion is motion of LARGE particles (visible), caused by invisible fast-moving molecules'
+  ],
+  tips:[
+    'To explain pressure rise when gas is heated: particles move faster → hit walls more frequently AND with greater force → pressure increases.',
+    'For Brownian motion: say "unequal bombardment by fast-moving invisible molecules."',
+    'T(K) = T(°C) + 273. Room temperature ≈ 300 K. Absolute zero = 0 K = −273°C.'
+  ],
+  formulas:[
+    {name:'Boyle\'s Law', main:'P₁V₁ = P₂V₂', forms:['P₁V₁ = P₂V₂','P₂ = P₁V₁/V₂','V₂ = P₁V₁/P₂'], vars:['P₁','V₁','P₂','V₂'], units:'Pa, m³ (or any consistent units)', example:{q:'Gas at P=200kPa, V=3m³. V compressed to 1m³. Find P₂.',a:'P₂ = P₁V₁/V₂ = 200×3/1 = 600 kPa'}},
+    {name:'Pressure Law', main:'P₁/T₁ = P₂/T₂', forms:['P₁/T₁ = P₂/T₂','P₂ = P₁T₂/T₁'], vars:['P₁','T₁','P₂','T₂'], units:'Pa, K (Kelvin only!)', example:{q:'Gas at 100kPa, 300K heated to 600K. Find P₂.',a:'P₂ = 100×600/300 = 200 kPa'}},
+    {name:'Celsius to Kelvin', main:'T(K) = T(°C) + 273', forms:['K = °C + 273','°C = K − 273'], vars:['T'], units:'K', example:{q:'Convert 27°C to Kelvin.',a:'T = 27 + 273 = 300 K'}}
+  ],
+  flashcards:[
+    {q:'What is Brownian motion? What does it provide evidence for?', a:'The random, erratic motion of small visible particles (e.g. smoke particles) caused by unequal bombardment by invisible, fast-moving molecules. Evidence for the kinetic model of matter.'},
+    {q:'State Boyle\'s Law in words and as an equation.', a:'At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume. P₁V₁ = P₂V₂.'},
+    {q:'Convert 127°C to Kelvin.', a:'T = 127 + 273 = 400 K'},
+    {q:'What is absolute zero?', a:'The lowest possible temperature (0 K = −273°C) at which particles have minimum kinetic energy.'},
+    {q:'Gas at 150 kPa and 300 K is heated to 450 K at constant volume. Find new pressure.', a:'P₂ = P₁T₂/T₁ = 150 × 450/300 = 225 kPa'},
+    {q:'Explain why gas pressure increases when temperature rises (at constant volume).', a:'Higher temp → particles move faster → hit container walls more frequently and with greater force → pressure increases.'},
+    {q:'Difference between evaporation and boiling?', a:'Evaporation: occurs at surface only, at any temperature. Boiling: occurs throughout liquid, at fixed boiling point, with bubbles forming.'}
+  ],
+  mcqs:[
+    {q:'A gas occupies 4 m³ at 100 kPa. At constant temperature, if volume becomes 2 m³, the pressure is:', opts:['50 kPa','400 kPa','200 kPa','25 kPa'], ans:2, exp:'Boyle\'s Law: P₂ = P₁V₁/V₂ = 100×4/2 = 200 kPa'},
+    {q:'Gas at 27°C (300 K) and 200 kPa is heated to 327°C (600 K) at constant volume. New pressure is:', opts:['100 kPa','300 kPa','400 kPa','200 kPa'], ans:2, exp:'P₂ = P₁T₂/T₁ = 200 × 600/300 = 400 kPa'},
+    {q:'Brownian motion of smoke particles is caused by:', opts:['Air currents in the room','Gravity acting on the particles','Unequal bombardment by air molecules','The particles hitting each other'], ans:2, exp:'Individual fast-moving air molecules hit the larger smoke particles unevenly, causing the random jerky motion.'},
+    {q:'Which statement about evaporation is correct?', opts:['It occurs throughout the liquid','It occurs at a fixed temperature','Only high-energy surface particles escape','It requires a heat source'], ans:2, exp:'Evaporation: only the most energetic particles at the surface escape. It occurs at any temperature, only from the surface.'}
+  ]
+},
+{
+  id:'thermal-properties', num:'10', name:'Thermal Properties & Temperature', tag:'thermal', tagLabel:'Thermal',
+  keywords:'specific heat capacity latent heat melting boiling temperature change state thermometer bimetallic',
+  points:[
+    '<strong>Temperature</strong> measures average kinetic energy of particles. <strong>Thermal/Heat energy</strong> is the total energy transferred.',
+    '<strong>Specific heat capacity (c)</strong>: energy needed to raise 1 kg of a substance by 1°C. Unit: J/(kg·°C).',
+    'Q = mcΔT. Use when temperature CHANGES but state does NOT change.',
+    '<strong>Specific latent heat (L)</strong>: energy per kg needed to change state WITHOUT temperature change. Unit: J/kg.',
+    'Q = mL. Use when state CHANGES but temperature stays CONSTANT.',
+    'Latent heat of <strong>fusion</strong>: solid ↔ liquid. Latent heat of <strong>vaporisation</strong>: liquid ↔ gas.',
+    'During a change of state, energy goes into breaking/forming intermolecular bonds, not into kinetic energy — so temperature stays constant.',
+    'Water has high specific heat capacity (4200 J/kg°C) → absorbs lots of energy for small temperature rise → ideal coolant.',
+    '<strong>Thermal expansion</strong>: most substances expand when heated (particles push apart). Gases expand most, then liquids, then solids.',
+    '<strong>Bimetallic strip</strong>: two metals with different expansion rates bonded together. When heated, it bends toward the metal that expands less. Used in thermostats, fire alarms.'
+  ],
+  mistakes:[
+    'Using Q=mcΔT when state is changing — use Q=mL instead during phase changes',
+    'Using Q=mL when temperature is changing — use Q=mcΔT instead',
+    'Forgetting ΔT means CHANGE in temperature: ΔT = T_final − T_initial',
+    'Saying temperature changes during a phase change — it STAYS CONSTANT'
+  ],
+  tips:[
+    'Memory: mcΔT when temperature changes; mL when state changes (L = latent = hidden = no temp change).',
+    'On a heating curve: sloped sections = Q=mcΔT (temp rising). Flat sections = Q=mL (state changing).',
+    'Steeper slope on heating curve = lower specific heat capacity (heats faster per joule).'
+  ],
+  formulas:[
+    {name:'Specific Heat Capacity', main:'Q = mcΔT', forms:['Q = mcΔT','c = Q/(mΔT)','ΔT = Q/(mc)','m = Q/(cΔT)'], vars:['Q','m','c','ΔT'], units:'J, kg, J/(kg°C), °C', example:{q:'2 kg water heated by 30°C. c=4200. Find Q.',a:'Q = 2 × 4200 × 30 = 252 000 J'}},
+    {name:'Specific Latent Heat', main:'Q = mL', forms:['Q = mL','L = Q/m','m = Q/L'], vars:['Q','m','L'], units:'J, kg, J/kg', example:{q:'0.5 kg ice melts. L_fusion=330 000 J/kg. Q=?',a:'Q = 0.5 × 330 000 = 165 000 J'}}
+  ],
+  flashcards:[
+    {q:'Distinguish between temperature and thermal energy.', a:'Temperature: measure of average KE of particles. Thermal energy: total energy transferred from hot to cold object.'},
+    {q:'What is specific heat capacity? Give the equation.', a:'Energy needed to raise 1 kg of a substance by 1°C. Q = mcΔT.'},
+    {q:'Why does temperature stay constant during a change of state?', a:'Energy input breaks (or forms) intermolecular bonds — goes into potential energy, NOT kinetic energy. KE stays the same → temperature stays constant.'},
+    {q:'5 kg of water (c = 4200 J/kg°C) is heated from 20°C to 80°C. Find energy needed.', a:'Q = 5 × 4200 × (80−20) = 5 × 4200 × 60 = 1 260 000 J'},
+    {q:'What is latent heat of vaporisation?', a:'Energy per kg needed to change liquid to gas (or gas to liquid) at constant temperature.'},
+    {q:'A bimetallic strip bends when heated. Which way and why?', a:'It bends toward the metal with LOWER expansion. The metal that expands more is on the outside of the curve.'}
+  ],
+  mcqs:[
+    {q:'3 kg of aluminium (c = 900 J/kg°C) is heated from 20°C to 120°C. Energy absorbed:', opts:['270 000 J','27 000 J','2 700 J','90 J'], ans:0, exp:'Q = mcΔT = 3 × 900 × (120−20) = 3 × 900 × 100 = 270 000 J'},
+    {q:'On a heating curve, the temperature remains constant during melting because:', opts:['Heat is being lost to the surroundings','Energy is used to break bonds, not increase KE','The heater has switched off','Specific heat capacity is zero'], ans:1, exp:'During state changes, energy breaks intermolecular bonds (increases PE), not KE. Since temperature depends on KE, it stays constant.'},
+    {q:'2 kg of water needs to be fully vaporised. L_v = 2.26 × 10⁶ J/kg. Energy required:', opts:['4.52 × 10⁶ J','1.13 × 10⁶ J','2.26 × 10⁶ J','9.04 × 10⁵ J'], ans:0, exp:'Q = mL = 2 × 2.26×10⁶ = 4.52×10⁶ J'}
+  ]
+},
+{
+  id:'thermal-transfer', num:'11', name:'Transfer of Thermal Energy', tag:'thermal', tagLabel:'Thermal',
+  keywords:'conduction convection radiation infrared vacuum flask insulation absorption emission black silver dull',
+  points:[
+    '<strong>Conduction</strong>: heat transfer through a solid by vibrating particles passing energy to neighbours. Metals also use free electrons → much faster.',
+    '<strong>Convection</strong>: heat transfer in fluids (liquids/gases) by bulk movement. Hot fluid becomes less dense, rises; cooler fluid sinks. Forms convection currents.',
+    '<strong>Radiation</strong>: heat transfer by infrared electromagnetic waves. Requires NO medium — works in a vacuum (how Sun heats Earth).',
+    'Convection CANNOT occur in solids (particles cannot move from place to place).',
+    'Conduction is negligible in fluids (much less efficient than in solids).',
+    '<strong>Dull black surfaces</strong>: best absorbers AND best emitters of radiation.',
+    '<strong>Shiny silver surfaces</strong>: worst absorbers AND worst emitters (best reflectors).',
+    'Rate of radiation emission depends on surface temperature and surface area. Hotter and larger = more radiation emitted.',
+    '<strong>Vacuum flask</strong>: vacuum prevents conduction and convection. Silvered walls reduce radiation.',
+    'An object emits net heat if it is hotter than surroundings. It absorbs net heat if cooler than surroundings.'
+  ],
+  mistakes:[
+    'Saying convection happens in solids — it CANNOT. Conduction is the process in solids.',
+    'Confusing "radiation" with "radioactivity" — thermal radiation is infrared EM waves, not nuclear',
+    'Saying black surfaces absorb heat but don\'t emit — they both absorb AND emit the most',
+    'Forgetting that radiation travels through vacuum — it\'s the only method that can'
+  ],
+  tips:[
+    'CCR rule: Conduction=solids(Contact), Convection=Currents in fluids, Radiation=no medium(Remote).',
+    'Full convection current description: hot fluid expands → less dense → rises → cooler fluid fills the space → heats and rises → cycle continues.',
+    'Vacuum flask reduces ALL three — vacuum for C+C, silver for R.'
+  ],
+  formulas:[],
+  flashcards:[
+    {q:'What is conduction? In which type of material is it most effective?', a:'Transfer of thermal energy through matter by vibrating particles colliding. Most effective in solids, especially metals (also have free electrons carrying energy).'},
+    {q:'Describe how a convection current forms in a liquid heated from below.', a:'Liquid at bottom heats → expands → becomes less dense → rises. Cooler denser liquid above sinks to take its place → heats and rises → convection current forms.'},
+    {q:'Why can radiation travel through a vacuum but conduction and convection cannot?', a:'Radiation is an EM wave — it doesn\'t need particles to transfer energy. Conduction and convection require particles to vibrate or move.'},
+    {q:'Which surface is the best emitter of radiation? Which is the worst?', a:'Best: dull black surface. Worst: shiny silver surface (best reflector, worst emitter).'},
+    {q:'Explain how a vacuum flask keeps liquid hot.', a:'1. Vacuum between double walls → prevents conduction and convection. 2. Silvered walls → reflects radiation, reducing emission/absorption.'},
+    {q:'Why are solar panels painted black?', a:'Black is a better absorber of radiation. Absorbs maximum infrared radiation from the Sun → more energy collected.'}
+  ],
+  mcqs:[
+    {q:'Conduction of heat through a metal is mainly due to:', opts:['Convection currents in the metal','Vibrating lattice ions only','Free electrons transferring energy','Infrared radiation within the metal'], ans:2, exp:'Metals have free (delocalized) electrons that move quickly through the lattice, transferring kinetic energy efficiently. This makes metals good conductors.'},
+    {q:'Why can heat from the Sun reach the Earth through space?', opts:['Conduction through space dust','Convection currents in space','Infrared radiation needs no medium','All three methods'], ans:2, exp:'Space is a vacuum, so conduction and convection cannot occur. Only radiation (EM waves) can travel through a vacuum.'},
+    {q:'A surface painted dull black compared to the same surface painted shiny silver will:', opts:['Emit less radiation','Absorb less radiation','Emit and absorb more radiation','Only absorb more radiation'], ans:2, exp:'Dull black surfaces are both the best absorbers and best emitters of radiation. Shiny silver surfaces reflect most radiation.'}
+  ]
+},
+{
+  id:'waves', num:'12', name:'General Wave Properties', tag:'waves', tagLabel:'Waves',
+  keywords:'transverse longitudinal wavelength frequency amplitude wave speed reflection refraction diffraction wavefront',
+  points:[
+    'A wave transfers energy without transferring matter.',
+    '<strong>Transverse waves</strong>: vibration perpendicular to direction of travel. Examples: EM waves, water waves. Have crests and troughs.',
+    '<strong>Longitudinal waves</strong>: vibration parallel to direction of travel. Example: sound, ultrasound. Have compressions and rarefactions.',
+    '<strong>Wavelength (λ)</strong>: distance between two consecutive identical points. <strong>Amplitude (a)</strong>: max displacement from rest.',
+    '<strong>Frequency (f)</strong>: oscillations per second (Hz). <strong>Period (T)</strong>: time for one oscillation. f = 1/T.',
+    'Wave speed equation: v = fλ. Frequency stays CONSTANT as wave passes through different media. Speed and wavelength change.',
+    '<strong>Reflection</strong>: angle of incidence = angle of reflection (measured from normal).',
+    '<strong>Refraction</strong>: wave bends when speed changes at a boundary. Into denser medium → slows → bends toward normal → wavelength decreases.',
+    '<strong>Diffraction</strong>: spreading of waves around the edges of obstacles or through gaps. Maximum when gap ≈ wavelength.',
+    'Points in phase: identical displacement and velocity (e.g., two consecutive crests).'
+  ],
+  mistakes:[
+    'Measuring angles from the SURFACE rather than from the NORMAL in reflection/refraction',
+    'Thinking frequency changes with medium — it stays the same. Speed and wavelength change.',
+    'Confusing amplitude with wavelength on diagrams',
+    'Thinking more diffraction = smaller gap. Maximum diffraction when gap ≈ wavelength.'
+  ],
+  tips:[
+    'v = fλ: speed = frequency × wavelength. If speed halves in new medium, wavelength halves (f constant).',
+    'For diffraction: gap much bigger than λ → almost no spreading. Gap ≈ λ → maximum spreading.',
+    'Transverse: up-down motion while moving forward (like a jump rope). Longitudinal: push-pull motion along direction of travel (like a slinky).'
+  ],
+  formulas:[
+    {name:'Wave Speed', main:'v = f × λ', forms:['v = f × λ','f = v / λ','λ = v / f'], vars:['v','f','λ'], units:'m/s, Hz, m', example:{q:'Wave: f=200 Hz, λ=1.5 m. Find speed.',a:'v = 200 × 1.5 = 300 m/s'}},
+    {name:'Period-Frequency', main:'f = 1 / T', forms:['f = 1/T','T = 1/f'], vars:['f','T'], units:'Hz, s', example:{q:'Period T = 0.04 s. Find frequency.',a:'f = 1/0.04 = 25 Hz'}}
+  ],
+  flashcards:[
+    {q:'What is the difference between a transverse and longitudinal wave?', a:'Transverse: vibration perpendicular to wave travel (e.g., light). Longitudinal: vibration parallel to wave travel (e.g., sound).'},
+    {q:'What happens to wavelength when a wave moves from deep to shallow water?', a:'Speed decreases → since f is constant and v=fλ, wavelength decreases proportionally.'},
+    {q:'A wave has frequency 50 Hz and wavelength 6 m. Find its speed.', a:'v = fλ = 50 × 6 = 300 m/s'},
+    {q:'When does maximum diffraction occur?', a:'When the gap width is approximately equal to the wavelength.'},
+    {q:'State the law of reflection.', a:'The angle of incidence equals the angle of reflection, both measured from the normal to the surface at the point of incidence.'},
+    {q:'A wave has period 0.025 s. What is its frequency?', a:'f = 1/T = 1/0.025 = 40 Hz'}
+  ],
+  mcqs:[
+    {q:'A wave has frequency 400 Hz and speed 320 m/s. Its wavelength is:', opts:['128 000 m','0.8 m','1.25 m','80 m'], ans:1, exp:'λ = v/f = 320/400 = 0.8 m'},
+    {q:'When a wave passes from a less dense to a more dense medium, it:', opts:['Speeds up and bends away from normal','Slows down and bends toward normal','Maintains same speed and direction','Speeds up and bends toward normal'], ans:1, exp:'In a denser medium, the wave slows down. Slower speed with same frequency → shorter wavelength. The ray bends toward the normal.'},
+    {q:'Diffraction of a wave through a gap is greatest when:', opts:['The gap is much larger than the wavelength','The gap is much smaller than the wavelength','The gap size equals the wavelength','The wave has very high frequency'], ans:2, exp:'Maximum spreading (diffraction) occurs when gap ≈ wavelength. If gap is much larger, almost no spreading occurs.'}
+  ]
+},
+{
+  id:'sound', num:'13', name:'Sound', tag:'waves', tagLabel:'Waves',
+  keywords:'sound longitudinal compression rarefaction echo ultrasound speed medium hearing pitch loudness',
+  points:[
+    'Sound is a <strong>longitudinal mechanical wave</strong>. It requires a medium — cannot travel through a vacuum.',
+    'Sound is produced by vibrating objects. The vibrations create <strong>compressions</strong> (high pressure) and <strong>rarefactions</strong> (low pressure).',
+    'Speed of sound in air ≈ 330–340 m/s. Faster in liquids; fastest in solids.',
+    'Speed increases with higher temperature (faster particles transmit vibrations more efficiently).',
+    'Human hearing range: <strong>20 Hz to 20 000 Hz</strong>. Below 20 Hz = infrasound. Above 20 000 Hz = ultrasound.',
+    '<strong>Pitch</strong> = frequency. Higher pitch = higher frequency. <strong>Loudness</strong> = amplitude. Greater amplitude = louder.',
+    '<strong>Echo</strong> = reflection of sound. Distance = speed × (time/2). Divide time by 2 because sound travels THERE AND BACK.',
+    '<strong>Ultrasound</strong> (>20 000 Hz): medical imaging (foetal scanning), sonar, flaw detection in metals. Safe — no ionising radiation.',
+    'A cathode ray oscilloscope (CRO) displays sound as a wave. Taller = louder. More waves per division = higher frequency.',
+    'Atmospheric pressure does NOT affect the speed of sound.'
+  ],
+  mistakes:[
+    'Using the full echo time without halving it — always divide by 2 for echo calculations',
+    'Saying sound travels faster in air than in water — it\'s the OPPOSITE (faster in water, fastest in solids)',
+    'Confusing pitch with loudness on oscilloscope diagrams',
+    'Thinking sound travels in vacuum — it CANNOT. It needs particles to vibrate.'
+  ],
+  tips:[
+    'Echo formula: d = v × t/2 (t = total time for sound to go there AND come back).',
+    'Speed order: Gas < Liquid < Solid. "Go Live Solid" to remember increasing order.',
+    'CRO: taller waveform = louder (amplitude). More waves in same width = higher pitch (frequency).'
+  ],
+  formulas:[
+    {name:'Echo Distance', main:'d = v × (t/2)', forms:['d = v×t/2','t = 2d/v','v = 2d/t'], vars:['d','v','t'], units:'m, m/s, s', example:{q:'Echo takes 0.6 s. Speed=340 m/s. Distance to wall?',a:'d = 340 × 0.6/2 = 340 × 0.3 = 102 m'}}
+  ],
+  flashcards:[
+    {q:'Can sound travel through a vacuum? Explain.', a:'No. Sound is a mechanical wave — it needs particles to vibrate and transmit the compressions and rarefactions. A vacuum has no particles.'},
+    {q:'In which medium is the speed of sound fastest?', a:'Solids (particles closest together, transfer vibrations fastest). Then liquids, then gases (slowest).'},
+    {q:'A ship sends a sonar pulse. The echo returns after 0.8 s. Speed=1500 m/s. Depth?', a:'d = v×t/2 = 1500 × 0.8/2 = 1500 × 0.4 = 600 m'},
+    {q:'State 3 uses of ultrasound.', a:'1. Prenatal scanning (safe, no X-rays). 2. Sonar (ship/submarine depth finding). 3. Flaw detection in metals.'},
+    {q:'On a CRO screen, how do you identify a louder sound with the same pitch?', a:'Same frequency (same number of waves) but LARGER amplitude (taller waveform).'},
+    {q:'What is the human audible frequency range?', a:'20 Hz to 20 000 Hz (20 kHz)'}
+  ],
+  mcqs:[
+    {q:'A sonar pulse takes 0.4 s to return from the seabed. Speed of sound in water is 1500 m/s. Depth of ocean:', opts:['600 m','300 m','375 m','150 m'], ans:1, exp:'d = v×t/2 = 1500 × 0.4/2 = 1500 × 0.2 = 300 m'},
+    {q:'Ultrasound is used for medical imaging instead of X-rays because:', opts:['It travels faster','It is non-ionising and safe for soft tissue','It gives clearer images','It is cheaper than X-rays'], ans:1, exp:'Ultrasound is non-ionising — it doesn\'t damage DNA or cells. X-rays are ionising and can cause mutations.'},
+    {q:'Which oscilloscope trace shows a sound with the same frequency but greater loudness?', opts:['Same amplitude, more waves','Larger amplitude, same number of waves','Smaller amplitude, same number of waves','Fewer waves, larger amplitude'], ans:1, exp:'Loudness depends on amplitude. Same frequency = same number of waves in the trace. Greater loudness = larger amplitude.'}
+  ]
+},
+{
+  id:'light', num:'14', name:'Light', tag:'waves', tagLabel:'Waves',
+  keywords:'reflection refraction total internal reflection critical angle lens dispersion prism spectrum ROYGBIV',
+  points:[
+    'Light travels at 3 × 10⁸ m/s in vacuum. Travels in straight lines. Is a transverse EM wave.',
+    '<strong>Law of Reflection</strong>: angle of incidence = angle of reflection (from normal). Image in plane mirror: same size, same distance, virtual, laterally inverted.',
+    '<strong>Refraction</strong>: light bends at a boundary when speed changes. Into denser medium → slows → bends toward normal. Frequency stays constant.',
+    '<strong>Refractive index</strong> n = sin(i)/sin(r) = speed in vacuum/speed in medium. n > 1 always.',
+    '<strong>Total Internal Reflection (TIR)</strong>: occurs when (1) light travels from dense to less dense medium, AND (2) angle of incidence ≥ critical angle.',
+    'Critical angle c: sin(c) = 1/n. For glass (n≈1.5): c ≈ 42°.',
+    '<strong>Optical fibres</strong>: use TIR to carry light signals. Used in endoscopes, internet, telephone.',
+    '<strong>Converging (convex) lens</strong>: focuses parallel rays to principal focus F. Concave diverges light.',
+    'Three standard rays for ray diagrams: parallel-to-axis (→ through F), through-centre (straight), through-F (→ parallel).',
+    '<strong>Dispersion</strong>: white light splits into spectrum through prism. ROYGBIV (Red-Orange-Yellow-Green-Blue-Indigo-Violet). Red bends least, Violet most.'
+  ],
+  mistakes:[
+    'Measuring angles from the SURFACE not from the NORMAL — always measure from the normal',
+    'TIR requires BOTH conditions: dense-to-less-dense AND angle ≥ critical angle. Both must be true.',
+    'Refractive index n is always ≥ 1 (light always slows in a medium vs vacuum)',
+    'In dispersion, saying red bends most — it\'s violet that bends most (highest frequency, highest n)'
+  ],
+  tips:[
+    '"Richard Of York Gave Battle In Vain" = ROYGBIV spectrum order.',
+    'TIR conditions: Dense → Less dense. Angle ≥ critical angle. Both needed.',
+    'n = sin(i)/sin(r): i = angle in air (larger), r = angle in glass (smaller).'
+  ],
+  formulas:[
+    {name:'Refractive Index', main:'n = sin i / sin r', forms:['n = sin i / sin r','sin r = sin i / n','n = c / v'], vars:['n','i','r'], units:'No unit (n > 1)', example:{q:'Light hits glass: i=45°, r=28°. Find n.',a:'n = sin45°/sin28° = 0.707/0.469 ≈ 1.51'}},
+    {name:'Critical Angle', main:'sin c = 1 / n', forms:['sin c = 1/n','n = 1/sin c','c = sin⁻¹(1/n)'], vars:['c','n'], units:'degrees', example:{q:'Glass has n=1.5. Find critical angle.',a:'sin c = 1/1.5 = 0.667 → c = 41.8° ≈ 42°'}}
+  ],
+  flashcards:[
+    {q:'State the two conditions for Total Internal Reflection.', a:'1. Light must travel from a denser medium to a less dense medium. 2. The angle of incidence must be greater than or equal to the critical angle.'},
+    {q:'What is the critical angle for glass with n = 1.5?', a:'sin c = 1/n = 1/1.5 = 0.667. c = sin⁻¹(0.667) ≈ 42°'},
+    {q:'How does a converging lens form a magnified virtual image?', a:'When the object is placed between the lens and the focal point (u < f), the refracted rays diverge. Traced back, they meet behind the object — upright, magnified, virtual image.'},
+    {q:'State the order of colours in the visible spectrum from least to most bent.', a:'Red, Orange, Yellow, Green, Blue, Indigo, Violet (ROYGBIV). Red bends least, Violet most.'},
+    {q:'Why is violet light refracted more than red light through a prism?', a:'Violet light has higher frequency and shorter wavelength → higher refractive index → slows more → bends more.'},
+    {q:'Give two uses of optical fibres (total internal reflection).', a:'Endoscopy (medical imaging), internet/telephone communication, providing light in hard-to-reach places.'}
+  ],
+  mcqs:[
+    {q:'Light travels from glass (n=1.5) to air. The critical angle is:', opts:['41.8°','48.2°','30°','60°'], ans:0, exp:'sin c = 1/n = 1/1.5 = 0.667. c = sin⁻¹(0.667) ≈ 41.8°'},
+    {q:'A ray in glass hits the glass-air boundary at 50° (critical angle = 42°). What happens?', opts:['Partial refraction only','Total internal reflection','The ray is absorbed','Normal refraction into air'], ans:1, exp:'50° > 42° (critical angle), AND light is going from dense (glass) to less dense (air). Both TIR conditions met → total internal reflection.'},
+    {q:'Which colour of light is refracted MOST by a glass prism?', opts:['Red','Yellow','Green','Violet'], ans:3, exp:'Violet has the shortest wavelength and highest frequency in visible light → highest refractive index → bends (refracts) the most.'}
+  ]
+},
+{
+  id:'em-spectrum', num:'15', name:'Electromagnetic Spectrum', tag:'waves', tagLabel:'Waves',
+  keywords:'radio microwave infrared visible ultraviolet xray gamma wavelength frequency speed uses dangers',
+  points:[
+    'All EM waves travel at <strong>3 × 10⁸ m/s</strong> in vacuum. They are transverse and require no medium.',
+    'Order (increasing frequency / decreasing wavelength): <strong>Radio → Microwave → Infrared → Visible → UV → X-ray → Gamma</strong>.',
+    'Mnemonic: <strong>"Rugby Match Is Very Unlike Xylophone Game"</strong>.',
+    '<strong>Radio</strong>: TV and radio broadcasting, radio telescopes.',
+    '<strong>Microwave</strong>: satellite TV, mobile phones, cooking (water molecules vibrate), Bluetooth.',
+    '<strong>Infrared (IR)</strong>: thermal cameras, remote controls, optical fibres, intruder alarms.',
+    '<strong>Visible light</strong>: sight, photography, fibre optics.',
+    '<strong>UV</strong>: sterilisation (kills bacteria), detecting fake banknotes (fluorescence), Vitamin D production in skin.',
+    '<strong>X-rays</strong>: medical imaging (bones), security scanners, detecting metal flaws.',
+    '<strong>Gamma rays</strong>: treating cancer (radiotherapy), sterilising medical equipment, detecting metal flaws. Most penetrating, most ionising.'
+  ],
+  mistakes:[
+    'Confusing gamma rays (EM wave from nucleus) with alpha/beta particles (radioactive decay products)',
+    'Saying gamma has longest wavelength — it has SHORTEST wavelength and HIGHEST frequency',
+    'Forgetting that ionising radiation includes UV, X-rays AND gamma rays (not just nuclear radiation)',
+    'Microwaves heat food by vibrating WATER molecules — not by heating the container'
+  ],
+  tips:[
+    '"Rugby Match Is Very Unlike Xylophone Game" = Radio, Micro, IR, Visible, UV, X-ray, Gamma.',
+    'Going right (R→G): frequency increases, wavelength decreases, energy increases, more ionising.',
+    'Dangers: Microwaves → heat soft tissue; IR → burns; UV → skin cancer; X/Gamma → ionisation, cancer.'
+  ],
+  formulas:[
+    {name:'EM Wave Speed', main:'v = f × λ', forms:['v = fλ','f = v/λ','λ = v/f'], vars:['v','f','λ'], units:'3×10⁸ m/s, Hz, m', example:{q:'Gamma ray: f=3×10²⁰ Hz. Find wavelength.',a:'λ = v/f = 3×10⁸ / 3×10²⁰ = 10⁻¹² m'}}
+  ],
+  flashcards:[
+    {q:'State the EM spectrum in order of increasing frequency.', a:'Radio → Microwave → Infrared → Visible → Ultraviolet → X-ray → Gamma ray'},
+    {q:'Give 2 uses and 1 danger of UV radiation.', a:'Uses: sterilising drinking water, detecting fake banknotes (fluorescence). Danger: causes skin cancer, eye cataracts.'},
+    {q:'Why do mobile phones use microwaves not radio waves?', a:'Microwaves can carry more data (higher frequency) and have better signal quality for short distances.'},
+    {q:'What danger do X-rays and gamma rays pose?', a:'They are ionising radiation — they can ionise atoms in cells, damaging DNA, causing mutations and cancer.'},
+    {q:'How do microwaves cook food?', a:'Microwaves cause water molecules in food to vibrate vigorously, generating heat. The food is heated from within.'},
+    {q:'What property is common to all EM waves?', a:'They all: travel at 3×10⁸ m/s in vacuum, are transverse waves, carry energy, require no medium.'}
+  ],
+  mcqs:[
+    {q:'Which type of electromagnetic radiation has the longest wavelength?', opts:['Gamma rays','Ultraviolet','X-rays','Radio waves'], ans:3, exp:'Radio waves have the lowest frequency and longest wavelength in the EM spectrum.'},
+    {q:'Which EM wave is used to sterilise medical equipment?', opts:['Microwaves','Infrared','Gamma rays','Radio waves'], ans:2, exp:'Gamma rays have high energy and are deeply penetrating — they kill all microorganisms, making them ideal for sterilisation.'},
+    {q:'Infrared cameras detect heat because all warm objects:', opts:['Reflect infrared','Emit infrared radiation','Absorb only infrared','Conduct infrared'], ans:1, exp:'All objects above absolute zero emit infrared radiation. Warmer objects emit more — this is what infrared cameras detect.'}
+  ]
+},
+{
+  id:'electricity', num:'16', name:'Electricity', tag:'elec', tagLabel:'Electricity',
+  keywords:'current voltage resistance ohms law series parallel power charge fuse earth thermistor LDR diode potential divider',
+  points:[
+    '<strong>Current (I)</strong>: rate of flow of charge. Q = It. Unit: Amperes (A). Measured in series.',
+    '<strong>Potential difference/Voltage (V)</strong>: energy per unit charge. 1 V = 1 J/C. Measured in parallel.',
+    '<strong>Resistance (R)</strong>: opposition to current. V = IR (Ohm\'s Law). Unit: Ohms (Ω).',
+    '<strong>Ohm\'s Law</strong>: V = IR at constant temperature. Ohmic conductors have straight I-V graph through origin.',
+    '<strong>Series</strong>: same current everywhere; voltages add up; R_total = R₁ + R₂.',
+    '<strong>Parallel</strong>: same voltage across each branch; currents add up; 1/R_total = 1/R₁ + 1/R₂.',
+    '<strong>Power</strong>: P = IV = I²R = V²/R. Energy: E = Pt = IVt.',
+    '<strong>Thermistor</strong>: resistance decreases as temperature increases. Used in temperature sensing.',
+    '<strong>LDR</strong> (light-dependent resistor): resistance decreases as light intensity increases.',
+    '<strong>Fuse</strong>: protects circuit. Rating = current above which it melts. Always connect to LIVE wire. Choose next size up above calculated current.'
+  ],
+  mistakes:[
+    'Connecting ammeter in PARALLEL (wrong) — must be in SERIES',
+    'Connecting voltmeter in SERIES (wrong) — must be in PARALLEL',
+    'Using 1/R_total for series — only for parallel. Series: R_total = R₁+R₂',
+    'Electrons flow from −ve to +ve, but conventional current flows from +ve to −ve'
+  ],
+  tips:[
+    'Ammeter: Series (A for both). Voltmeter: Parallel (V for both). Remember which is which.',
+    'For parallel resistors: easier to use: R_total = R₁×R₂/(R₁+R₂) for just two resistors.',
+    'Series: if one bulb goes out, all go out. Parallel: others stay on independently.'
+  ],
+  formulas:[
+    {name:'Ohm\'s Law', main:'V = I × R', forms:['V = IR','I = V/R','R = V/I'], vars:['V','I','R'], units:'V, A, Ω', example:{q:'R=60Ω, I=0.5A. Find V.',a:'V = 0.5 × 60 = 30 V'}},
+    {name:'Charge', main:'Q = I × t', forms:['Q = It','I = Q/t','t = Q/I'], vars:['Q','I','t'], units:'C, A, s', example:{q:'I=2A for 30s. Find charge.',a:'Q = 2 × 30 = 60 C'}},
+    {name:'Electrical Power', main:'P = I × V', forms:['P = IV = I²R = V²/R','I = P/V','V = P/I'], vars:['P','I','V'], units:'W, A, V', example:{q:'I=3A, V=12V. Find power.',a:'P = 3 × 12 = 36 W'}},
+    {name:'Electrical Energy', main:'E = P × t', forms:['E = Pt = IVt','P = E/t','t = E/P'], vars:['E','P','t'], units:'J, W, s', example:{q:'2kW heater for 3 hours. Find energy.',a:'E = 2000 × 3×3600 = 21 600 000 J'}}
+  ],
+  flashcards:[
+    {q:'State Ohm\'s Law.', a:'The current through a conductor is directly proportional to the potential difference across it, provided physical conditions (temperature) remain constant. V = IR.'},
+    {q:'What happens to resistance in a parallel circuit vs in series?', a:'Series: R_total = R₁+R₂ (increases). Parallel: R_total < smallest individual resistor (decreases).'},
+    {q:'A 1200 W kettle runs for 5 minutes (300 s). Find energy used.', a:'E = Pt = 1200 × 300 = 360 000 J = 360 kJ'},
+    {q:'What does a thermistor do as temperature increases?', a:'Resistance DECREASES. (Useful in temperature sensors — lower R → more current → triggers alarm.)'},
+    {q:'A fuse is rated at 5A. If calculated current is 3.2 A, which fuse should be used?', a:'5A fuse (next standard size above 3.2 A). Never use a fuse lower than operating current.'},
+    {q:'Two 6Ω resistors connected in parallel. Total resistance?', a:'1/R = 1/6 + 1/6 = 2/6. R = 3 Ω. (Or use R₁R₂/(R₁+R₂) = 36/12 = 3 Ω)'},
+    {q:'Why is the ammeter connected in series?', a:'An ammeter must have very low resistance so it doesn\'t reduce the current it\'s trying to measure. It goes in series so all current passes through it.'}
+  ],
+  mcqs:[
+    {q:'Two resistors (4Ω and 6Ω) are connected in series with a 20V supply. The current through the circuit is:', opts:['2 A','3.3 A','5 A','8 A'], ans:0, exp:'R_total = 4+6 = 10Ω. I = V/R = 20/10 = 2 A'},
+    {q:'A 12 V bulb draws 2 A. Its resistance is:', opts:['6 Ω','24 Ω','14 Ω','0.17 Ω'], ans:0, exp:'R = V/I = 12/2 = 6 Ω'},
+    {q:'An LDR is placed in a bright room. Its resistance will:', opts:['Increase','Stay the same','Decrease','Become zero'], ans:2, exp:'LDR: resistance decreases as light intensity increases (Light Dependent Resistor — more light → less resistance).'},
+    {q:'Power consumed by a 3Ω resistor carrying 4A is:', opts:['48 W','12 W','0.75 W','64 W'], ans:0, exp:'P = I²R = 4² × 3 = 16 × 3 = 48 W'}
+  ]
+},
+{
+  id:'magnetism', num:'17', name:'Magnetism & Magnetic Fields', tag:'elec', tagLabel:'Electricity',
+  keywords:'magnetic field poles flux lines electromagnet solenoid motor effect Fleming left hand force current',
+  points:[
+    'Magnetic field lines run from <strong>North to South outside a magnet</strong>. Closer lines = stronger field. Lines never cross.',
+    'Magnetic materials: <strong>iron, steel, nickel, cobalt</strong>. Induced poles always attract toward the inducing pole.',
+    '<strong>Soft iron</strong>: easily magnetised and demagnetised (used in electromagnets). <strong>Steel</strong>: hard to magnetise, retains magnetism (permanent magnets).',
+    'Electromagnet: current through solenoid creates a magnetic field similar to a bar magnet. Stronger with: more current, more turns, soft iron core.',
+    'To demagnetise: hammer it, heat to glow, or pass AC through it and remove slowly.',
+    '<strong>Motor effect</strong>: a current-carrying conductor in a magnetic field experiences a force. F = BIL.',
+    '<strong>Fleming\'s Left Hand Rule</strong>: First finger = Field, seCond finger = Current (I), thuMb = Motion (force).',
+    'Force is ZERO when current is parallel to field. Maximum when current ⊥ field.',
+    'DC motor: coil in magnetic field. Split-ring commutator reverses current every half-turn to keep rotation going.',
+    'If both current AND field directions are reversed, force direction STAYS THE SAME.'
+  ],
+  mistakes:[
+    'Using Right Hand Rule for motor effect — use LEFT hand for motors (LEFT: motors)',
+    'Forgetting the split-ring commutator reverses current each half turn in a DC motor',
+    'Magnetic field lines go from North to South OUTSIDE the magnet (South to North inside)',
+    'Induced poles: a magnetic material placed near a N pole always develops a S pole at the near end (attraction)'
+  ],
+  tips:[
+    'FBI mnemonic: First finger=Field, Between(second)=Current, thuMb=Motion. Left hand for motors.',
+    'To increase motor force: increase current, use stronger magnet, more turns, add iron core.',
+    'Hard magnetic material = hard to magnetise and demagnetise → permanent magnets. Soft = easy both ways → electromagnets.'
+  ],
+  formulas:[
+    {name:'Force on Current (Motor)', main:'F = B × I × L', forms:['F = BIL','B = F/(IL)','I = F/(BL)'], vars:['F','B','I','L'], units:'N, T, A, m', example:{q:'B=0.5T, I=3A, L=0.2m. Find force.',a:'F = 0.5 × 3 × 0.2 = 0.3 N'}}
+  ],
+  flashcards:[
+    {q:'State Fleming\'s Left Hand Rule.', a:'Left hand: First finger = direction of magnetic Field. seCond finger = direction of Current. thuMb = direction of Motion (force). Only for motors.'},
+    {q:'What is the difference between hard and soft magnetic materials?', a:'Soft (e.g., iron): easy to magnetise and demagnetise → used in electromagnets. Hard (e.g., steel): difficult to magnetise, retains magnetism → permanent magnets.'},
+    {q:'How can an electromagnet be made stronger?', a:'1. Increase current. 2. Add more turns/coils. 3. Add a soft iron core.'},
+    {q:'A current is flowing north in a wire. Magnetic field is pointing east. Which way does the force act?', a:'Use Left Hand Rule: Second finger north (current), First finger east (field) → thuMb points upward. Force acts upward.'},
+    {q:'Why does a DC motor need a split-ring commutator?', a:'Without it, current would reverse direction, making the coil rock back and forth. The commutator swaps connections each half turn, keeping torque (rotation) in the same direction.'},
+    {q:'How do you demagnetise a permanent magnet?', a:'1. Strike/hammer repeatedly. 2. Heat to red-hot then let cool slowly. 3. Pass alternating current through it while slowly removing.'}
+  ],
+  mcqs:[
+    {q:'The force on a current-carrying conductor in a magnetic field is zero when:', opts:['Current is maximum','Conductor is perpendicular to field','Conductor is parallel to field','Magnetic field is strongest'], ans:2, exp:'Force = BIL sinθ. When current is parallel to field (θ=0°), sin0°=0, so F=0. Maximum force when perpendicular (θ=90°).'},
+    {q:'In Fleming\'s Left Hand Rule, the thumb represents:', opts:['Direction of current','Direction of field','Direction of force/motion','Direction of electron flow'], ans:2, exp:'FBI: First finger=Field, seCond=Current(I), thuMb=Motion. The thumb shows the direction of the force (motion).'},
+    {q:'A soft iron core is placed inside an electromagnet coil to:', opts:['Reduce the current needed','Increase the strength of the magnetic field','Prevent the magnet from demagnetising','Reverse the field direction'], ans:1, exp:'Soft iron concentrates and strengthens the magnetic field. Its high magnetic permeability dramatically increases the flux.'}
+  ]
+},
+{
+  id:'em-effects', num:'18', name:'Electromagnetic Effects', tag:'elec', tagLabel:'Electricity',
+  keywords:'electromagnetic induction generator transformer AC DC Faraday Lenz turns ratio national grid step up step down',
+  points:[
+    '<strong>Electromagnetic induction</strong>: moving a conductor through a magnetic field (or changing field) induces an EMF.',
+    'Induced EMF increases when: conductor moves faster, stronger magnet, more coil turns.',
+    '<strong>Lenz\'s Law</strong>: the induced current always opposes the change that caused it.',
+    '<strong>AC generator</strong>: coil rotating in field → continuous AC. Uses slip rings. EMF maximum when coil is horizontal (cuts field most); zero when vertical.',
+    '<strong>DC motor</strong>: uses split-ring commutator to keep rotation direction constant.',
+    '<strong>Transformers</strong>: change AC voltage. Two coils on a soft iron core. ONLY work with AC (changing current → changing field → changing flux → induces EMF).',
+    'Step-UP transformer: more turns on secondary (N₂ > N₁) → higher voltage, lower current.',
+    'Step-DOWN transformer: fewer turns on secondary → lower voltage, higher current.',
+    'Transformer equation: V₁/V₂ = N₁/N₂. Ideal (100% efficient): V₁I₁ = V₂I₂.',
+    '<strong>National Grid</strong>: power transmitted at HIGH voltage, LOW current. Less energy lost as heat (P_loss = I²R). Step-up at power station; step-down at homes.'
+  ],
+  mistakes:[
+    'Transformers work with AC only — DC gives constant flux, no change, no induction',
+    'Step-up transformer: voltage up, current DOWN (power must be conserved)',
+    'N₁/N₂ = V₁/V₂: secondary on right, primary on left — don\'t mix up primary and secondary',
+    'The coil in a generator has maximum EMF when HORIZONTAL (maximum rate of flux cutting), zero when vertical'
+  ],
+  tips:[
+    '"V₁/V₂ = N₁/N₂": Volts match Turns. Step-up = more secondary turns → more voltage.',
+    'National Grid: high V → low I → P_loss = I²R is small. High efficiency.',
+    'Right Hand rule for generators; Left Hand for motors (use LEFT for LOADS, i.e., motors using power).'
+  ],
+  formulas:[
+    {name:'Transformer Voltage', main:'V₁/V₂ = N₁/N₂', forms:['V₁/V₂ = N₁/N₂','V₂ = V₁N₂/N₁','N₂ = N₁V₂/V₁'], vars:['V₁','V₂','N₁','N₂'], units:'V, V, turns, turns', example:{q:'Primary: 240V, 400 turns. Secondary: 1200 turns. Find V₂.',a:'V₂ = 240 × 1200/400 = 720 V (step-up)'}},
+    {name:'Transformer Power (ideal)', main:'V₁I₁ = V₂I₂', forms:['V₁I₁ = V₂I₂','I₂ = V₁I₁/V₂','I₁ = V₂I₂/V₁'], vars:['V₁','I₁','V₂','I₂'], units:'W (power constant)', example:{q:'Primary: 240V, 2A. Secondary: 12V. Find I₂.',a:'I₂ = V₁I₁/V₂ = 240×2/12 = 40 A'}}
+  ],
+  flashcards:[
+    {q:'State Faraday\'s Law of electromagnetic induction.', a:'An EMF is induced in a conductor when there is a change in magnetic flux linking the conductor. The greater the rate of change of flux, the greater the induced EMF.'},
+    {q:'Why do transformers only work with AC?', a:'AC current constantly changes direction → changing magnetic field in iron core → changing magnetic flux in secondary → induced EMF. DC would produce constant flux → no change → no induced EMF.'},
+    {q:'A transformer has 500 primary turns and 2000 secondary turns. Primary voltage is 230V. Find secondary voltage.', a:'V₂ = V₁ × N₂/N₁ = 230 × 2000/500 = 920 V (step-up)'},
+    {q:'Why is electrical power transmitted at high voltage in the National Grid?', a:'High voltage → low current (P=VI is constant). P_loss = I²R. Lower I → much less power lost as heat in cables.'},
+    {q:'What is the difference between AC and DC?', a:'AC (alternating current): direction of current reverses periodically. DC (direct current): flows in one direction only. Batteries produce DC; generators produce AC.'},
+    {q:'An AC generator produces maximum EMF when the coil is horizontal. Why?', a:'When horizontal, the coil sides move perpendicular to the field → maximum rate of cutting field lines → maximum EMF. When vertical, sides move parallel to field → no flux cutting → zero EMF.'}
+  ],
+  mcqs:[
+    {q:'A transformer has 200 primary turns and 50 secondary turns. If primary voltage is 240V, secondary voltage is:', opts:['960 V','60 V','48 V','1200 V'], ans:1, exp:'V₂ = V₁ × N₂/N₁ = 240 × 50/200 = 60 V. This is a step-down transformer.'},
+    {q:'The National Grid transmits power at high voltage to reduce:', opts:['Current in cables to reduce energy losses','Voltage fluctuations','Transformer noise','The need for step-down transformers'], ans:0, exp:'P_loss = I²R. Transmitting at high V → low I → I² very small → minimal energy wasted as heat in cables.'},
+    {q:'Moving a magnet more quickly into a coil will:', opts:['Decrease the induced EMF','Increase the frequency of AC produced','Increase the induced EMF','Have no effect on EMF'], ans:2, exp:'Faster movement → greater rate of flux change → greater induced EMF (Faraday\'s Law).'}
+  ]
+},
+{
+  id:'nuclear', num:'19', name:'Nuclear Physics', tag:'nuclear', tagLabel:'Nuclear',
+  keywords:'atom nucleus proton neutron electron isotope alpha beta gamma decay half life fission fusion chain reaction',
+  points:[
+    'Atom: tiny nucleus (protons + neutrons) surrounded by electrons. Proton: +1 charge, mass 1. Neutron: 0 charge, mass 1. Electron: −1 charge, negligible mass.',
+    '<strong>Atomic/proton number Z</strong>: number of protons. <strong>Mass/nucleon number A</strong>: protons + neutrons. Neutrons = A − Z.',
+    '<strong>Isotopes</strong>: same element (same Z), different neutron number (different A). Same chemical properties.',
+    '<strong>Alpha (α)</strong>: ²₄He nucleus. Stopped by paper. Highest ionising. A decreases by 4, Z decreases by 2.',
+    '<strong>Beta (β)</strong>: fast electron. Stopped by 3 mm aluminium. Medium ionising. A unchanged, Z increases by 1.',
+    '<strong>Gamma (γ)</strong>: high-energy EM wave. Reduced by thick lead/concrete. Lowest ionising, most penetrating. A and Z unchanged.',
+    '<strong>Half-life</strong>: time for half the nuclei to decay. N = N₀ × (½)ⁿ where n = number of half-lives elapsed.',
+    'Background radiation must be SUBTRACTED before any half-life calculation.',
+    '<strong>Nuclear fission</strong>: large nucleus splits into two smaller nuclei + neutrons + energy. Chain reaction. Used in nuclear reactors.',
+    '<strong>Nuclear fusion</strong>: two small nuclei join to form larger nucleus + energy. Powers the Sun. Requires very high temperature.'
+  ],
+  mistakes:[
+    'Not subtracting background radiation before calculating activity/half-life',
+    'In alpha decay: A decreases by 4, Z decreases by 2 (not by 4)',
+    'In beta decay: A stays same, Z INCREASES by 1 (a neutron converts to a proton + electron)',
+    'Gamma emission: NO change to A or Z. It just releases energy from an excited nucleus'
+  ],
+  tips:[
+    'ABC penetration: Alpha=paper, Beta=Aluminium, Gamma=Concrete. Ionisation is REVERSE: A most, G least.',
+    'Nuclear equations must balance: top numbers (A) and bottom numbers (Z) both equal on each side.',
+    'After n half-lives: N = N₀/2ⁿ. Halve the starting amount n times.'
+  ],
+  formulas:[
+    {name:'Half-life Decay', main:'N = N₀ × (½)ⁿ', forms:['N = N₀ × (1/2)ⁿ','n = log(N/N₀)/log(0.5)'], vars:['N','N₀','n'], units:'Any count unit; n = number of half-lives', example:{q:'N₀=800, after 3 half-lives. Find N.',a:'N = 800 × (1/2)³ = 800 × 1/8 = 100'}},
+    {name:'Alpha Decay Rule', main:'A-4, Z-2', forms:['ᴬ_Z X → ᴬ⁻⁴_(Z-2) Y + ⁴_2 He'], vars:['A','Z'], units:'(nuclear notation)', example:{q:'Uranium-238 (Z=92) emits alpha. New element?',a:'A: 238-4=234. Z: 92-2=90 (Thorium-234)'}},
+    {name:'Beta Decay Rule', main:'A same, Z+1', forms:['ᴬ_Z X → ᴬ_(Z+1) Y + ⁰_-1 e'], vars:['A','Z'], units:'(nuclear notation)', example:{q:'Carbon-14 (Z=6) emits beta. New element?',a:'A: 14 (same). Z: 6+1=7 (Nitrogen-14)'}}
+  ],
+  flashcards:[
+    {q:'Which radiation is stopped by a sheet of paper?', a:'Alpha (α). Alpha has 2 protons + 2 neutrons — heavy and slow, very short range, highest ionising.'},
+    {q:'What is the half-life of a substance?', a:'The time taken for half the radioactive nuclei in a sample to decay. After each half-life, the count rate/number of nuclei halves.'},
+    {q:'800 atoms of a radioactive element. Half-life = 10 s. How many remain after 30 s?', a:'30 s = 3 half-lives. N = 800 × (½)³ = 800/8 = 100 atoms'},
+    {q:'How does beta decay change A and Z?', a:'A stays the SAME. Z increases by 1. (A neutron → proton + β⁻ particle)'},
+    {q:'Difference between nuclear fission and fusion?', a:'Fission: large nucleus splits → energy + neutrons + smaller nuclei (chain reaction). Fusion: two small nuclei join → energy (powers stars). Both release energy.'},
+    {q:'Why must background radiation be subtracted before half-life calculations?', a:'Background radiation is always present from natural sources. The detector measures total count rate, so background must be removed to get only the source\'s radiation.'},
+    {q:'State the order of penetrating power (lowest to highest).', a:'Alpha < Beta < Gamma. (Ionising power is the reverse: Alpha > Beta > Gamma)'}
+  ],
+  mcqs:[
+    {q:'An alpha particle is emitted by an atom with mass number 226 and proton number 88. The daughter nucleus has:', opts:['A=222, Z=86','A=222, Z=90','A=230, Z=86','A=226, Z=86'], ans:0, exp:'Alpha: A decreases by 4 (226-4=222), Z decreases by 2 (88-2=86). New atom: A=222, Z=86 (Radon).'},
+    {q:'A source has activity 480 counts/min. Background radiation is 80 counts/min. After 2 half-lives, the corrected activity is:', opts:['200 counts/min','100 counts/min','120 counts/min','160 counts/min'], ans:1, exp:'Corrected initial activity = 480−80 = 400 c/m. After 2 half-lives: 400 × (1/2)² = 400/4 = 100 counts/min. (Add back background? The question asks for corrected → 100 c/m)'},
+    {q:'Which radiation causes the greatest ionisation per unit length?', opts:['Gamma rays','Beta particles','Alpha particles','X-rays'], ans:2, exp:'Alpha particles: heavy, slow, large charge (+2). They ionise densely along a very short path. Gamma is least ionising per unit length.'}
+  ]
+},
+{
+  id:'space', num:'20', name:'Space Physics', tag:'nuclear', tagLabel:'Nuclear/Space',
+  keywords:'solar system planets stars universe big bang red shift galaxy nebula star cycle hubble orbital speed',
+  points:[
+    'Scale: Moon orbits Earth → Earth orbits Sun (Solar System) → Solar System in Milky Way galaxy → Universe has billions of galaxies.',
+    '<strong>Planets in order</strong>: Mercury, Venus, Earth, Mars (rocky/inner), Jupiter, Saturn, Uranus, Neptune (gaseous/outer).',
+    'Inner planets: rocky, small, dense, high melting-point materials. Outer planets: gaseous, large, cold, made of lighter elements.',
+    '<strong>Orbital speed</strong>: v = 2πr/T. Objects further from Sun move SLOWER (weaker gravitational pull).',
+    '<strong>Star life cycle (small star)</strong>: Nebula → Protostar → Main sequence → Red giant → White dwarf → Black dwarf.',
+    '<strong>Star life cycle (massive star)</strong>: Nebula → Protostar → Main sequence → Red supergiant → Supernova → Neutron star or Black hole.',
+    'Main sequence star is stable: outward fusion pressure = inward gravitational pressure.',
+    '<strong>Red shift</strong>: light from distant galaxies has wavelength shifted toward red end. Means galaxies are moving away from us.',
+    'More distant galaxy → greater red shift → faster recession velocity (Hubble\'s Law: v = H₀d).',
+    '<strong>Big Bang Theory</strong>: Universe began from a single hot dense point ~14 billion years ago and has been expanding ever since. Evidence: red shift + cosmic microwave background radiation (CMBR).'
+  ],
+  mistakes:[
+    'Saying galaxies are moving through space — space ITSELF is expanding, stretching the wavelength',
+    'Confusing neutron star and black hole — black hole forms from the most massive stars after supernova',
+    'Saturn is missing from the planet order mnemonic — MVEMJSUN: Mercury Venus Earth Mars Jupiter Saturn Uranus Neptune',
+    'Red shift: galaxies MOVING AWAY from us. Blue shift: moving toward us. We observe red shift → expanding Universe'
+  ],
+  tips:[
+    'Planet order: "My Very Educated Mother Just Served Us Nachos" = Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.',
+    'Star cycle key split: star runs out of hydrogen → what happens depends on its MASS.',
+    'CMBR = afterglow heat of the Big Bang. Still detected uniformly from all directions → Universe is expanding.'
+  ],
+  formulas:[
+    {name:'Orbital Speed', main:'v = 2πr / T', forms:['v = 2πr/T','T = 2πr/v','r = vT/(2π)'], vars:['v','r','T'], units:'m/s, m, s', example:{q:'Earth: r=1.5×10¹¹m, T=3.15×10⁷s. Find speed.',a:'v = 2π×1.5×10¹¹/3.15×10⁷ ≈ 3×10⁴ m/s'}},
+    {name:'Hubble\'s Law', main:'v = H₀ × d', forms:['v = H₀d','d = v/H₀','H₀ = v/d'], vars:['v','H₀','d'], units:'km/s, km/s/Mpc, Mpc', example:{q:'Galaxy: d=200 Mpc, H₀=70 km/s/Mpc. Find recession v.',a:'v = 70 × 200 = 14 000 km/s'}}
+  ],
+  flashcards:[
+    {q:'Name the 8 planets in order from the Sun.', a:'Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune. ("My Very Educated Mother Just Served Us Nachos")'},
+    {q:'Describe the life cycle of a star similar to our Sun.', a:'Nebula → Protostar → Main Sequence Star → Red Giant → White Dwarf → Black Dwarf'},
+    {q:'What is red shift? What does it tell us?', a:'Light from distant galaxies has its wavelength shifted toward longer (red) wavelengths. This means galaxies are moving away from us — evidence the Universe is expanding.'},
+    {q:'State two pieces of evidence for the Big Bang Theory.', a:'1. Red shift: all distant galaxies moving away → Universe expanding (suggests it was once smaller). 2. CMBR: uniform microwave background radiation detected from all directions — leftover heat from the Big Bang.'},
+    {q:'Why do outer planets orbit more slowly than inner planets?', a:'They are further from the Sun → weaker gravitational pull → smaller orbital speed. Gravitational force provides centripetal acceleration; at larger r, less force needed for orbit → lower speed.'},
+    {q:'What is a main sequence star? What keeps it stable?', a:'A star fusing hydrogen into helium in its core. Stable because: outward pressure from nuclear fusion = inward gravitational pressure. This balance is maintained for billions of years.'}
+  ],
+  mcqs:[
+    {q:'Evidence that the Universe is expanding includes:', opts:['The existence of black holes','Red shift of light from distant galaxies','The presence of cosmic dust','Planetary orbits being circular'], ans:1, exp:'Red shift shows all distant galaxies are moving away from us. The further they are, the greater the red shift and the faster they recede — the Universe is expanding.'},
+    {q:'Which sequence correctly describes the life cycle of a MASSIVE star?', opts:['Main sequence → Red giant → White dwarf','Main sequence → Red supergiant → Supernova → Black hole','Protostar → White dwarf → Neutron star','Nebula → Red giant → Supernova'], ans:1, exp:'Massive stars: Main sequence → Red supergiant → Supernova → (Neutron star or Black hole). The critical difference from small stars is the supernova and the final stage.'},
+    {q:'A planet further from the Sun compared to Earth will have:', opts:['Greater orbital speed','Shorter orbital period','Longer orbital period','Same orbital speed'], ans:2, exp:'Larger orbital radius → larger circumference → further to travel. Also, weaker gravity → slower speed. Both effects mean a much longer orbital period (Kepler\'s Third Law).'}
+  ]
+}
+];
+
+// ═══════════════════════════════════════════════════════════════
+// QUIZ DATA — 25 MCQs + 5 Calculation Questions
+// ═══════════════════════════════════════════════════════════════
+const QUIZ_QUESTIONS = [
+  {type:'mcq', topic:'Motion', q:'A car starts from rest and accelerates at 4 m/s². How far does it travel in 5 seconds?', opts:['100 m','50 m','20 m','80 m'], ans:1, exp:'s = ut + ½at² = 0 + ½ × 4 × 25 = 50 m'},
+  {type:'mcq', topic:'Forces', q:'Newton\'s 3rd Law states that action-reaction pairs always act on:', opts:['The same object','Different objects of the same type','Different objects of different types','The same surface'], ans:1, exp:'N3 pairs: equal magnitude, opposite direction, same type of force, on DIFFERENT objects.'},
+  {type:'mcq', topic:'Energy', q:'A 2 kg ball moving at 10 m/s has kinetic energy of:', opts:['20 J','100 J','200 J','10 J'], ans:1, exp:'KE = ½mv² = ½ × 2 × 100 = 100 J'},
+  {type:'mcq', topic:'Waves', q:'A wave has speed 300 m/s and wavelength 0.6 m. Its frequency is:', opts:['180 Hz','500 Hz','300 Hz','0.002 Hz'], ans:1, exp:'f = v/λ = 300/0.6 = 500 Hz'},
+  {type:'mcq', topic:'Electricity', q:'Three 6Ω resistors are connected in parallel. Total resistance is:', opts:['18 Ω','3 Ω','2 Ω','6 Ω'], ans:2, exp:'1/R = 1/6 + 1/6 + 1/6 = 3/6 = 1/2. R = 2 Ω'},
+  {type:'mcq', topic:'Nuclear', q:'Beta decay of Carbon-14 (Z=6) produces:', opts:['Nitrogen-14 (Z=7)','Boron-14 (Z=5)','Carbon-13 (Z=6)','Nitrogen-13 (Z=7)'], ans:0, exp:'Beta: A unchanged (14), Z increases by 1 (6→7). Product: Nitrogen-14.'},
+  {type:'mcq', topic:'Thermal', q:'During melting, the temperature of a substance:', opts:['Increases steadily','Decreases','Remains constant','First decreases then increases'], ans:2, exp:'During state changes, energy breaks bonds (increases PE), not KE. Temperature (∝ average KE) stays constant.'},
+  {type:'mcq', topic:'Light', q:'Light travels from glass (n=1.5) to air at angle of 60° to the normal. Since critical angle ≈ 42°, the light:', opts:['Refracts into air','Is totally internally reflected','Is absorbed','Reflects and refracts equally'], ans:1, exp:'60° > critical angle (42°) AND going dense→less dense. Both TIR conditions met → total internal reflection.'},
+  {type:'mcq', topic:'Magnetism', q:'The force on a current-carrying wire in a magnetic field is greatest when the current is:', opts:['Parallel to the field','At 45° to the field','Antiparallel to the field','Perpendicular to the field'], ans:3, exp:'F = BIL sinθ. Maximum when θ = 90° (perpendicular). F = 0 when parallel (θ = 0°).'},
+  {type:'mcq', topic:'Kinetic Model', q:'When gas in a sealed container is heated at constant volume, pressure increases because:', opts:['Gas particles become larger','Particles collide with walls more frequently and with greater force','Volume decreases','Density decreases'], ans:1, exp:'Higher temperature → particles move faster → hit walls more frequently AND with greater force per collision → pressure increases.'},
+  {type:'mcq', topic:'Momentum', q:'A 5 kg trolley moving at 4 m/s collides and sticks to a stationary 3 kg trolley. Final velocity:', opts:['2.5 m/s','5 m/s','1.5 m/s','4 m/s'], ans:0, exp:'p_before = 5×4 = 20 kg·m/s. p_after = (5+3)v = 8v. v = 20/8 = 2.5 m/s'},
+  {type:'mcq', topic:'EM Spectrum', q:'Which EM radiation is used to treat cancer?', opts:['Radio waves','Microwaves','Infrared','Gamma rays'], ans:3, exp:'Gamma rays (high energy, deeply penetrating) are used in radiotherapy to destroy cancer cells.'},
+  {type:'mcq', topic:'Space', q:'Red shift in the spectrum of distant galaxies provides evidence that:', opts:['Galaxies are blue','The Universe is contracting','Galaxies are moving away, so Universe is expanding','Stars emit red light'], ans:2, exp:'Red shift means wavelengths are stretched → galaxies moving away. All galaxies show red shift → Universe expanding.'},
+  {type:'mcq', topic:'Transformer', q:'A transformer has 800 primary and 200 secondary turns. Primary voltage 240V. Secondary voltage is:', opts:['960 V','60 V','120 V','80 V'], ans:1, exp:'V₂ = V₁ × N₂/N₁ = 240 × 200/800 = 60 V. This is a step-down transformer.'},
+  {type:'mcq', topic:'Density', q:'An object of mass 270 g has volume 100 cm³. Its density in kg/m³ is:', opts:['2700','0.0027','27','2.7'], ans:0, exp:'ρ = m/V = 0.27/(100×10⁻⁶) = 0.27/0.0001 = 2700 kg/m³'},
+  {type:'mcq', topic:'Pressure', q:'Pressure at a depth of 5 m in a liquid of density 800 kg/m³ (g=10 N/kg) is:', opts:['40 000 Pa','4000 Pa','8000 Pa','1600 Pa'], ans:0, exp:'P = ρgh = 800 × 10 × 5 = 40 000 Pa'},
+  {type:'mcq', topic:'Sound', q:'An echo is heard 0.5 s after a sound is made. Speed of sound = 340 m/s. Distance to the reflecting wall:', opts:['170 m','340 m','85 m','680 m'], ans:2, exp:'d = v×t/2 = 340 × 0.5/2 = 340 × 0.25 = 85 m'},
+  {type:'mcq', topic:'Half-life', q:'A radioactive sample has initial activity 640 Bq (background=40 Bq). After 3 half-lives, corrected activity is:', opts:['80 Bq','75 Bq','40 Bq','120 Bq'], ans:1, exp:'Corrected initial = 640−40 = 600 Bq. After 3 half-lives: 600 × (1/2)³ = 600/8 = 75 Bq.'},
+  {type:'mcq', topic:'Electricity', q:'A 60 W lamp is left on for 2 hours. Energy consumed in kJ:', opts:['432 kJ','120 kJ','0.12 kJ','720 kJ'], ans:0, exp:'E = Pt = 60 × 2×3600 = 60 × 7200 = 432 000 J = 432 kJ'},
+  {type:'mcq', topic:'Mass/Weight', q:'An astronaut (mass 75 kg) on the Moon (g=1.6 N/kg). Her weight is:', opts:['750 N','75 N','120 N','46.9 N'], ans:2, exp:'W = mg = 75 × 1.6 = 120 N. Her mass stays 75 kg.'},
+  {type:'mcq', topic:'Heat Capacity', q:'2.5 kg of water is heated from 20°C to 60°C. Specific heat capacity = 4200 J/kg°C. Energy required:', opts:['420 000 J','168 000 J','500 J','840 000 J'], ans:0, exp:'Q = mcΔT = 2.5 × 4200 × (60−20) = 2.5 × 4200 × 40 = 420 000 J'},
+  {type:'mcq', topic:'Refraction', q:'Light enters glass from air with angle of incidence 45° and refracts at 28°. Refractive index is approximately:', opts:['1.0','0.66','1.5','2.1'], ans:2, exp:'n = sin(45°)/sin(28°) = 0.707/0.469 ≈ 1.51 ≈ 1.5'},
+  {type:'mcq', topic:'Forces', q:'A spring (k = 250 N/m) is compressed by 0.08 m. Elastic force stored:', opts:['20 N','3125 N','0.8 N','2000 N'], ans:0, exp:'F = ke = 250 × 0.08 = 20 N. (Energy = ½ke² = ½×250×0.0064 = 0.8 J — but the question asks for force.)'},
+  {type:'mcq', topic:'Momentum', q:'A 0.5 kg ball hits a wall at 8 m/s and bounces back at 6 m/s. Contact time = 0.02 s. Average force of wall:', opts:['350 N','200 N','100 N','50 N'], ans:0, exp:'Δp = m(v−u) = 0.5×(−6−8) = 0.5×(−14) = −7 N·s. |F| = |Δp|/t = 7/0.02 = 350 N'},
+  {type:'mcq', topic:'Diffraction', q:'A sound wave (wavelength 0.5 m) passes through a doorway (width 0.6 m). What happens?', opts:['No diffraction occurs','Moderate diffraction — gap slightly larger than wavelength','Maximum diffraction — equal gap and wavelength','Sound is reflected back'], ans:1, exp:'Gap (0.6m) ≈ wavelength (0.5m) → significant diffraction. Not exactly equal but very close → strong spreading.'},
+  // Calculation Questions (5)
+  {type:'calc', topic:'SUVAT', q:'A ball rolls from rest down a ramp with acceleration 2.5 m/s². It travels for 4 seconds. \n\nCalculate: (a) its final velocity  (b) the distance it has travelled.', ans:'(a) v = u + at = 0 + 2.5 × 4 = 10 m/s\n(b) s = ut + ½at² = 0 + ½ × 2.5 × 16 = 20 m', checkAns:'20', tolerance:1, unit:'m (for distance)', hint:'Use v = u + at for part (a). Use s = ut + ½at² for part (b). u = 0 (starts from rest).'},
+  {type:'calc', topic:'Electricity', q:'A 9V battery is connected to a circuit with two resistors in series: R₁ = 3Ω and R₂ = 6Ω.\n\nCalculate: (a) total resistance  (b) current through the circuit  (c) voltage across R₂.', ans:'(a) R_total = 3 + 6 = 9 Ω\n(b) I = V/R = 9/9 = 1 A\n(c) V₂ = IR₂ = 1 × 6 = 6 V', checkAns:'1', tolerance:0.1, unit:'A (for current)', hint:'Series: R_total = R₁ + R₂. Then I = V/R. Then V = IR for each resistor.'},
+  {type:'calc', topic:'Energy', q:'A 1200 kg car is travelling at 20 m/s. The driver brakes, and the car stops in 5 seconds.\n\nCalculate: (a) KE before braking  (b) braking force  (c) stopping distance.', ans:'(a) KE = ½mv² = ½×1200×400 = 240 000 J\n(b) a = (0−20)/5 = −4 m/s². F = ma = 1200×4 = 4800 N\n(c) s = (u+v)/2 × t = (20+0)/2 × 5 = 50 m', checkAns:'50', tolerance:1, unit:'m (for stopping distance)', hint:'KE=½mv². For force: find deceleration first (a=(v-u)/t), then F=ma. Stopping distance: s=(u+v)/2 × t.'},
+  {type:'calc', topic:'Thermal', q:'A 0.8 kg block of ice at 0°C needs to be fully melted. Specific latent heat of fusion of ice = 330 000 J/kg.\n\nAfter melting, the water is heated to 80°C. Specific heat capacity of water = 4200 J/kg°C.\n\nCalculate total energy needed.', ans:'Energy to melt: Q₁ = mL = 0.8 × 330 000 = 264 000 J\nEnergy to heat water: Q₂ = mcΔT = 0.8 × 4200 × 80 = 268 800 J\nTotal: Q = 264 000 + 268 800 = 532 800 J', checkAns:'532800', tolerance:1000, unit:'J (total energy)', hint:'Two stages: (1) Q=mL for melting at constant temperature. (2) Q=mcΔT for heating from 0°C to 80°C. Add both.'},
+  {type:'calc', topic:'Nuclear/Half-life', q:'A radioactive source has an initial count rate of 3200 counts per minute. The background count rate is 200 counts per minute. The half-life of the source is 8 minutes.\n\nCalculate: (a) corrected initial count rate  (b) corrected count rate after 24 minutes.', ans:'(a) Corrected initial = 3200 − 200 = 3000 counts/min\n(b) 24 min = 24/8 = 3 half-lives\nCorrected rate = 3000 × (1/2)³ = 3000/8 = 375 counts/min', checkAns:'375', tolerance:5, unit:'counts/min (corrected after 24 min)', hint:'Step 1: Subtract background. Step 2: Find how many half-lives in 24 min. Step 3: Divide by 2 that many times.'}
+];
+
+// ═══════════════════════════════════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════════════════════════════════
+let currentTopic = null;
+let currentTab = 'learn';
+let fcIndex = 0;
+let fcKnown = [];
+let fcMissed = [];
+let fcQueue = [];
+let fcFlipped = false;
+
+let quizIndex = 0;
+let quizAnswered = false;
+let quizScore = 0;
+let quizCorrect = 0;
+let quizWrong = 0;
+let quizTimerInterval = null;
+let quizTimeLeft = 40 * 60;
+let quizStartTime = null;
+let activeTag = 'all';
+
+let calcCurrent_ = '0';
+let calcPrev_ = '';
+let calcOp_ = '';
+let calcJustEq_ = false;
+
+// ═══════════════════════════════════════════════════════════════
+// CALCULATOR LOGIC
+// ═══════════════════════════════════════════════════════════════
+function calcNum(n) {
+  if(calcJustEq_){ calcCurrent_='0'; calcJustEq_=false; }
+  if(n==='.' && calcCurrent_.includes('.')) return;
+  calcCurrent_ = calcCurrent_==='0' ? n : calcCurrent_+n;
+  updateCalcDisplay();
+}
+function calcOp(op) {
+  if(op==='del'){ calcCurrent_=calcCurrent_.length>1?calcCurrent_.slice(0,-1):'0'; updateCalcDisplay(); return; }
+  calcPrev_=calcCurrent_; calcOp_=op; calcCurrent_='0'; calcJustEq_=false;
+  updateCalcDisplay();
+}
+function calcEquals() {
+  let a=parseFloat(calcPrev_), b=parseFloat(calcCurrent_), r=0;
+  if(calcOp_==='+') r=a+b;
+  else if(calcOp_==='-') r=a-b;
+  else if(calcOp_==='*') r=a*b;
+  else if(calcOp_==='/') r=b!==0?a/b:0;
+  else r=b;
+  const rStr = Number.isInteger(r)?String(r):parseFloat(r.toFixed(8)).toString();
+  document.getElementById('calcPrev').textContent=calcPrev_+(calcOp_==='+'?'+':(calcOp_==='-'?'−':(calcOp_==='*'?'×':'÷')))+calcCurrent_+'=';
+  calcCurrent_=rStr; calcPrev_=''; calcOp_=''; calcJustEq_=true;
+  updateCalcDisplay();
+}
+function calcClear() { calcCurrent_='0'; calcPrev_=''; calcOp_=''; calcJustEq_=false; document.getElementById('calcPrev').textContent=''; updateCalcDisplay(); }
+function updateCalcDisplay() { document.getElementById('calcCurrent').textContent=calcCurrent_; }
+
+// ═══════════════════════════════════════════════════════════════
+// ROUTING
+// ═══════════════════════════════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showHome() {
+  stopQuizTimer();
+  showView('home');
+}
+function showQuizStart() {
+  stopQuizTimer();
+  document.getElementById('quiz-start').style.display='flex';
+  document.getElementById('quiz-active').style.display='none';
+  document.getElementById('result-view') && document.getElementById('result-view').classList.remove('active');
+  showView('quiz-view');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HOME RENDER
+// ═══════════════════════════════════════════════════════════════
+function renderHome() {
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = TOPICS.map(t => `
+    <div class="topic-tile" data-tag="${t.tag}" data-search="${t.name.toLowerCase()} ${t.keywords}" onclick="openTopic('${t.id}')">
+      <div class="tile-header">
+        <span class="tile-num">${t.num}</span>
+        <span class="tile-name">${t.name}</span>
+        <span class="tile-tag tag-${t.tag}">${t.tagLabel}</span>
+      </div>
+      <div class="tile-preview">
+        <span class="tile-pill">📖 ${t.points.length} notes</span>
+        <span class="tile-pill">🔺 ${t.formulas.length} formulas</span>
+        <span class="tile-pill">🃏 ${t.flashcards.length} cards</span>
+        <span class="tile-pill">✏️ ${t.mcqs.length} MCQs</span>
+      </div>
+      <span class="tile-arrow">↗</span>
+    </div>
+  `).join('');
+}
+
+function filterTopics() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let vis = 0;
+  document.querySelectorAll('.topic-tile').forEach(tile => {
+    const s = tile.dataset.search;
+    const t = tile.dataset.tag;
+    const matchQ = !q || s.includes(q);
+    const matchT = activeTag==='all' || t===activeTag;
+    tile.style.display = matchQ && matchT ? '' : 'none';
+    if(matchQ && matchT) vis++;
+  });
+  document.getElementById('noResults').style.display = vis===0 ? 'block' : 'none';
+}
+
+function filterByTag(tag, btn) {
+  activeTag = tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filterTopics();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TOPIC VIEW
+// ═══════════════════════════════════════════════════════════════
+function openTopic(id) {
+  currentTopic = TOPICS.find(t=>t.id===id);
+  if(!currentTopic) return;
+  fcIndex=0; fcKnown=[]; fcMissed=[]; fcFlipped=false;
+  fcQueue=[...currentTopic.flashcards.map((_,i)=>i)];
+  document.getElementById('topicHeaderName').textContent = currentTopic.name;
+  document.getElementById('topicHeaderMeta').textContent = `${currentTopic.tagLabel} · ${currentTopic.points.length} key points · ${currentTopic.formulas.length} formulas · ${currentTopic.flashcards.length} flashcards`;
+  switchTab('learn', document.querySelector('.tab-btn'));
+  renderLearn();
+  renderFormulas();
+  renderFlashcards();
+  renderPractice();
+  showView('topic-view');
+}
+
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  if(btn) btn.classList.add('active'); else { const tabs = document.querySelectorAll('.tab-btn'); if(tabs[0]) tabs[0].classList.add('active'); }
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+// ─── LEARN ───
+function renderLearn() {
+  const t = currentTopic;
+  document.getElementById('tab-learn').innerHTML = `
+    <div class="section-heading">Key Concepts</div>
+    <div class="points-list">${t.points.map(p=>`<div class="point"><div class="point-dot"></div><div class="point-text">${p}</div></div>`).join('')}</div>
+    <div class="section-heading">Common Mistakes ✗</div>
+    <div class="mistakes-grid">${t.mistakes.map(m=>`<div class="mistake-card"><div class="mistake-icon">⚠ Watch out</div><div class="mistake-text">${m}</div></div>`).join('')}</div>
+    ${t.tips && t.tips.length ? `<div class="section-heading">Examiner Tips ✓</div><div class="pro-tips">${t.tips.map(tip=>`<div class="pro-tip"><div class="pro-tip-icon">★ TIP</div><div class="pro-tip-text">${tip}</div></div>`).join('')}</div>` : ''}
+  `;
+}
+
+// ─── FORMULAS ───
+function renderFormulas() {
+  const t = currentTopic;
+  if(!t.formulas.length) { document.getElementById('tab-formulas').innerHTML = '<p style="color:var(--muted);padding:20px 0;">This topic relies on conceptual understanding rather than specific formulas.</p>'; return; }
+  document.getElementById('tab-formulas').innerHTML = `
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Click any formula card to expand it and see rearrangements, worked examples, and units.</p>
+    <div class="formulas-grid">${t.formulas.map((f,i)=>renderFormulaCard(f,i)).join('')}</div>
+  `;
+}
+
+function renderFormulaCard(f, i) {
+  const formsHtml = f.forms.map(form=>`<div class="form-row"><div class="form-eq">${form}</div></div>`).join('');
+  return `
+    <div class="formula-card" id="fcard-${i}" onclick="toggleFormula(${i})">
+      <div class="formula-top">
+        <div class="formula-name">${f.name}</div>
+        <div class="formula-main">${f.main}</div>
+        <div class="formula-expand-hint">Tap to expand ↓</div>
+      </div>
+      <div class="formula-detail">
+        <div class="section-heading" style="font-size:10px;margin-bottom:8px;">All rearrangements</div>
+        <div class="forms-list">${formsHtml}</div>
+        <div class="example-box">
+          <div class="example-q">Example: ${f.example.q}</div>
+          <div class="example-a">${f.example.a}</div>
+        </div>
+        <div class="formula-unit">Unit: <span>${f.units}</span></div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleFormula(i) {
+  const card = document.getElementById('fcard-'+i);
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.formula-card').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen) card.classList.add('open');
+}
+
+// ─── FLASHCARDS ───
+function renderFlashcards() {
+  updateFlashcardView();
+}
+
+function updateFlashcardView() {
+  const t = currentTopic;
+  const total = t.flashcards.length;
+  const known = fcKnown.length;
+  const container = document.getElementById('tab-flashcards');
+  if(fcQueue.length===0) {
+    const pct = Math.round(known/total*100);
+    container.innerHTML = `
+      <div class="fc-all-done">
+        <div class="fc-done-icon">${pct>=80?'🎉':'📚'}</div>
+        <div class="fc-done-title">${pct>=80?'Excellent!':'Keep Practising!'}</div>
+        <div class="fc-done-text">You knew ${known} of ${total} cards (${pct}%). ${fcMissed.length>0?`Missed ${fcMissed.length} — review and try again.`:''}</div>
+        <button class="fc-btn" onclick="restartFlashcards()" style="margin:12px auto;display:flex;justify-content:center;">↺ Restart All Cards</button>
+      </div>
+    `;
+    return;
+  }
+  const cardIdx = fcQueue[fcIndex % fcQueue.length];
+  const card = t.flashcards[cardIdx];
+  const dotsHtml = t.flashcards.map((_,i)=>{
+    let cls='fc-dot';
+    if(fcKnown.includes(i)) cls+=' known';
+    else if(fcMissed.includes(i)) cls+=' missed';
+    else if(cardIdx===i) cls+=' current';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  const remaining = fcQueue.length;
+  const progPct = Math.round((total - remaining) / total * 100);
+  container.innerHTML = `
+    <div class="fc-progress">
+      <div class="fc-counter"><strong>${total-remaining}</strong> / ${total} done</div>
+      <div class="fc-progress-bar"><div class="fc-progress-fill" style="width:${progPct}%"></div></div>
+      <div style="font-size:12px;color:var(--green)">${fcKnown.length} ✓</div>
+    </div>
+    <div class="fc-dots">${dotsHtml}</div>
+    <div class="fc-scene">
+      <div class="fc-card${fcFlipped?' flipped':''}" onclick="flipCard()" id="fcCard">
+        <div class="fc-front">
+          <div class="fc-label">Question</div>
+          <div class="fc-question">${card.q}</div>
+          <div class="fc-hint" style="margin-top:16px;font-size:11px;color:var(--muted)">Tap to reveal answer</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label">Answer</div>
+          <div class="fc-answer">${card.a}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-keyboard-hint">Space = flip · ← miss · → knew</div>
+    <div class="fc-controls">
+      <button class="fc-btn fc-missed" onclick="fcMissed_()" ${!fcFlipped?'style="opacity:0.4;pointer-events:none"':''}>✗ Missed</button>
+      <button class="fc-btn fc-flip" onclick="flipCard()">↺ Flip</button>
+      <button class="fc-btn fc-knew" onclick="fcKnew()" ${!fcFlipped?'style="opacity:0.4;pointer-events:none"':''}>✓ Knew it</button>
+    </div>
+  `;
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  const card = document.getElementById('fcCard');
+  if(card) card.classList.toggle('flipped', fcFlipped);
+  // Re-render to update button states
+  const btns = document.querySelectorAll('.fc-btn.fc-knew, .fc-btn.fc-missed');
+  btns.forEach(b => b.style.opacity = fcFlipped ? '1' : '0.4');
+  btns.forEach(b => b.style.pointerEvents = fcFlipped ? 'auto' : 'none');
+}
+
+function fcKnew() {
+  if(!fcFlipped) return;
+  const idx = fcQueue[fcIndex % fcQueue.length];
+  fcKnown.push(idx);
+  fcQueue.splice(fcIndex % fcQueue.length, 1);
+  fcFlipped = false;
+  if(fcIndex >= fcQueue.length) fcIndex = 0;
+  updateFlashcardView();
+}
+
+function fcMissed_() {
+  if(!fcFlipped) return;
+  const idx = fcQueue.splice(fcIndex % fcQueue.length, 1)[0];
+  fcMissed.push(idx);
+  fcQueue.push(idx); // put at end
+  fcFlipped = false;
+  if(fcIndex >= fcQueue.length) fcIndex = 0;
+  updateFlashcardView();
+}
+
+function restartFlashcards() {
+  fcIndex=0; fcKnown=[]; fcMissed=[]; fcFlipped=false;
+  fcQueue=[...currentTopic.flashcards.map((_,i)=>i)];
+  updateFlashcardView();
+}
+
+// Keyboard shortcuts for flashcards
+document.addEventListener('keydown', e => {
+  if(currentTab !== 'flashcards') return;
+  if(document.querySelector('#tab-flashcards .fc-all-done')) return;
+  if(e.code==='Space') { e.preventDefault(); flipCard(); }
+  if(e.code==='ArrowRight') fcKnew();
+  if(e.code==='ArrowLeft') fcMissed_();
+});
+
+// ─── PRACTICE ───
+function renderPractice() {
+  const t = currentTopic;
+  document.getElementById('tab-practice').innerHTML = `
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Answer each question, then click to reveal the explanation.</p>
+    <div class="mcq-list">${t.mcqs.map((mcq,qi)=>renderMCQ(mcq,qi,'practice')).join('')}</div>
+  `;
+}
+
+function renderMCQ(mcq, qi, ctx) {
+  const letters = ['A','B','C','D'];
+  return `
+    <div class="mcq-card" id="mcq-${ctx}-${qi}">
+      <div class="mcq-num">Question ${qi+1}</div>
+      <div class="mcq-q">${mcq.q}</div>
+      <div class="mcq-options">${mcq.opts.map((opt,oi)=>`
+        <button class="mcq-opt" onclick="answerMCQ('${ctx}',${qi},${oi},${mcq.ans})">
+          <span class="opt-letter">${letters[oi]}</span>${opt}
+        </button>
+      `).join('')}</div>
+      <div class="mcq-explanation" id="exp-${ctx}-${qi}">💡 ${mcq.exp}</div>
+    </div>
+  `;
+}
+
+function answerMCQ(ctx, qi, chosen, correct) {
+  const card = document.getElementById(`mcq-${ctx}-${qi}`);
+  if(!card) return;
+  const btns = card.querySelectorAll('.mcq-opt');
+  btns.forEach(b=>b.disabled=true);
+  btns[correct].classList.add('correct');
+  if(chosen !== correct) btns[chosen].classList.add('wrong');
+  const exp = document.getElementById(`exp-${ctx}-${qi}`);
+  if(exp) exp.classList.add('show');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════════════════════
+function startQuiz() {
+  quizIndex=0; quizAnswered=false; quizScore=0; quizCorrect=0; quizWrong=0;
+  quizTimeLeft=40*60; quizStartTime=Date.now();
+  document.getElementById('quiz-start').style.display='none';
+  document.getElementById('quiz-active').style.display='block';
+  calcClear();
+  renderQuizQuestion();
+  startQuizTimer();
+}
+
+function startQuizTimer() {
+  stopQuizTimer();
+  quizTimerInterval = setInterval(()=>{
+    quizTimeLeft--;
+    const m=Math.floor(quizTimeLeft/60), s=quizTimeLeft%60;
+    const el = document.getElementById('quizTimer');
+    if(el) el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(quizTimeLeft<=300) { if(el) el.style.color='var(--red)'; }
+    if(quizTimeLeft<=0) { stopQuizTimer(); finishQuiz(); }
+  },1000);
+}
+
+function stopQuizTimer() {
+  if(quizTimerInterval) { clearInterval(quizTimerInterval); quizTimerInterval=null; }
+}
+
+function confirmExitQuiz() {
+  if(confirm('Exit quiz? Your progress will be lost.')) { stopQuizTimer(); showHome(); }
+}
+
+function renderQuizQuestion() {
+  const total = QUIZ_QUESTIONS.length;
+  document.getElementById('quizProgressFill').style.width = `${(quizIndex/total)*100}%`;
+  document.getElementById('quizCounter').textContent = `Question ${quizIndex+1} of ${total}`;
+  const q = QUIZ_QUESTIONS[quizIndex];
+  const area = document.getElementById('quizQuestionArea');
+  const letters=['A','B','C','D','E'];
+  quizAnswered = false;
+  if(q.type==='mcq') {
+    area.innerHTML = `
+      <div class="q-type-badge">Multiple Choice · ${q.topic}</div>
+      <div class="quiz-q-text">${q.q.replace(/\n/g,'<br>')}</div>
+      <div class="quiz-options">${q.opts.map((opt,i)=>`
+        <button class="quiz-opt" onclick="answerQuizMCQ(${i},${q.ans})" id="qopt-${i}">
+          <span class="opt-badge">${letters[i]}</span>${opt}
+        </button>
+      `).join('')}</div>
+      <div class="quiz-ans-box" id="quizAns">
+        <div class="quiz-ans-label">Explanation</div>
+        <div class="quiz-ans-text">${q.exp}</div>
+      </div>
+      <div class="quiz-nav" style="margin-top:20px;">
+        <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuizQuestion()" disabled>Next →</button>
+      </div>
+    `;
+  } else {
+    area.innerHTML = `
+      <div class="q-type-badge calc-type">Calculation · ${q.topic}</div>
+      <div class="quiz-q-text">${q.q.replace(/\n/g,'<br>')}</div>
+      <div class="calc-input-area">
+        <div class="calc-input-label">Enter your final answer for the last part (use the calculator on the right):</div>
+        <div class="calc-input-wrap">
+          <input type="number" id="calcAnsInput" placeholder="Your answer…" step="any">
+          <button class="check-btn" onclick="checkCalcAnswer()">Check</button>
+        </div>
+        <div class="calc-hint" id="calcHint"></div>
+      </div>
+      <div class="quiz-ans-box" id="quizAns">
+        <div class="quiz-ans-label">Full Solution</div>
+        <div class="quiz-ans-text">${q.ans.replace(/\n/g,'<br>').replace(/([=→])/g,'<span class="math">$1</span>')}</div>
+      </div>
+      <div class="quiz-nav" style="margin-top:20px;">
+        <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuizQuestion()" disabled>Next →</button>
+      </div>
+    `;
+  }
+}
+
+function answerQuizMCQ(chosen, correct) {
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach(b=>b.disabled=true);
+  btns[correct].classList.add('correct');
+  if(chosen!==correct) { btns[chosen].classList.add('wrong'); quizWrong++; }
+  else { quizCorrect++; quizScore++; }
+  const ansBox = document.getElementById('quizAns');
+  if(ansBox) ansBox.classList.add('show');
+  const nextBtn = document.getElementById('quizNextBtn');
+  if(nextBtn) nextBtn.disabled=false;
+}
+
+function checkCalcAnswer() {
+  if(quizAnswered) return;
+  const q = QUIZ_QUESTIONS[quizIndex];
+  const userVal = parseFloat(document.getElementById('calcAnsInput').value);
+  const correct = parseFloat(q.checkAns);
+  const hint = document.getElementById('calcHint');
+  const isCorrect = Math.abs(userVal - correct) <= q.tolerance;
+  quizAnswered = true;
+  if(isCorrect) { quizCorrect++; quizScore++; hint.textContent = `✓ Correct! ${q.hint}`; hint.className='calc-hint correct show'; }
+  else { quizWrong++; hint.textContent = `✗ Expected ≈${q.checkAns} ${q.unit}. ${q.hint}`; hint.className='calc-hint wrong show'; }
+  const ansBox = document.getElementById('quizAns');
+  if(ansBox) ansBox.classList.add('show');
+  const nextBtn = document.getElementById('quizNextBtn');
+  if(nextBtn) nextBtn.disabled=false;
+  document.querySelector('.check-btn').disabled=true;
+}
+
+function nextQuizQuestion() {
+  quizIndex++;
+  if(quizIndex >= QUIZ_QUESTIONS.length) { stopQuizTimer(); finishQuiz(); return; }
+  renderQuizQuestion();
+}
+
+function finishQuiz() {
+  const total = QUIZ_QUESTIONS.length;
+  const pct = Math.round(quizScore/total*100);
+  let grade, message, gradeColor;
+  if(pct>=90) { grade='A*'; gradeColor='var(--green)'; message='Outstanding! You\'ve mastered this material. You\'re ready for the real exam.'; }
+  else if(pct>=80) { grade='A'; gradeColor='var(--accent)'; message='Excellent work! A solid A. Go through any missed topics one more time.'; }
+  else if(pct>=70) { grade='B'; gradeColor='var(--sky)'; message='Good performance. Review the topics you struggled with and you\'ll push to an A.'; }
+  else if(pct>=60) { grade='C'; gradeColor='var(--amber)'; message='Decent start. Use the flashcards and practice MCQs to strengthen the weaker areas.'; }
+  else { grade='Needs Work'; gradeColor='var(--red)'; message='Don\'t be discouraged. Go back through the topic cards systematically — you\'ll get there.'; }
+  const timeUsed = 40*60 - quizTimeLeft;
+  const mLeft = Math.floor(quizTimeLeft/60), sLeft = quizTimeLeft%60;
+  document.getElementById('resultPct').textContent = pct+'%';
+  document.getElementById('resultGrade').textContent = grade;
+  document.getElementById('resultGrade').style.color = gradeColor;
+  document.getElementById('resultMessage').textContent = message;
+  document.getElementById('resCorrNum').textContent = quizCorrect;
+  document.getElementById('resWrongNum').textContent = quizWrong;
+  document.getElementById('resTimeNum').textContent = quizTimeLeft>0?`${mLeft}:${String(sLeft).padStart(2,'0')}`:'0:00';
+  // Animate score ring
+  const circumference = 427;
+  const offset = circumference - (pct/100)*circumference;
+  document.getElementById('resultCircle').style.strokeDashoffset = offset;
+  showView('result-view');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+renderHome();
+</script>
+</body>
+</html>
